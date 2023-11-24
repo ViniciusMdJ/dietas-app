@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">DietasApp</string>
+    <string name="welcome_text">Seu App de Dietas</string>
+    <string name="password_text">Senha</string>
+    <string name="confirm_password_text">Confirmar senha</string>
+    <string name="lost_password_question">Esqueceu a sua senha?</string>
+    <string name="register_question">Não possui uma conta?</string>
+    <string name="register_text">Cadastre-se</string>
+    <string name="register_activity_title">Cadastro</string>
+    <string name="register_welcome_text">Faça a sua conta e comece as suas dietas</string>
+    <string name="user_name_text">Nome de Usuário</string>
+    <string name="email_edit_text">Endereço de Email</string>
+    <string name="phone_edit_text">Telefone</string>
+    <string name="register_new_account_text">Crie sua Conta</string>
+</resources>
