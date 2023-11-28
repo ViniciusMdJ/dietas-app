@@ -12,4 +12,9 @@
     <string name="email_edit_text">Endereço de Email</string>
     <string name="phone_edit_text">Telefone</string>
     <string name="register_new_account_text">Crie sua Conta</string>
+    <string name="my_diets">Minhas Dietas</string>
+    <string name="search">Buscar</string>
+    <string name="meal_title">Refeições para essa dieta</string>
+    <string name="time_string">Horario Definido: 7 horas</string>
+    <string name="foods_title">Alimentos para essa refeição</string>
 </resources>

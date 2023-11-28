@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".RegisterActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".SignUpActivity"
     android:background="@color/app_theme">
 
     <ImageView
@@ -56,28 +56,28 @@
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
         android:layout_marginTop="40dp"
-        android:background="@drawable/background_circle_white"
+        android:background="@drawable/background_circle"
         >
-    <ImageView
-        android:id="@+id/person_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/baseline_person_24"
-        android:layout_marginStart="20dp"
-        android:layout_gravity="center"
-        app:layout_constraintStart_toStartOf="parent"
-        />
-    <EditText
-        android:id="@+id/user_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="2dp"
-        android:hint="@string/user_name_text"
-        android:textColor="@color/gray"
-        />
+        <ImageView
+            android:id="@+id/person_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_person_24"
+            android:layout_marginStart="20dp"
+            android:layout_gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+        <EditText
+            android:id="@+id/user_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:hint="@string/user_name_text"
+            android:textColor="@color/gray"
+            />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/email_view"
@@ -90,7 +90,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
         android:layout_marginTop="18dp"
-        android:background="@drawable/background_circle_white"
+        android:background="@drawable/background_circle"
         >
         <ImageView
             android:id="@+id/email_icon"
@@ -124,7 +124,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
         android:layout_marginTop="18dp"
-        android:background="@drawable/background_circle_white"
+        android:background="@drawable/background_circle"
         >
         <ImageView
             android:id="@+id/phone_icon"
@@ -159,7 +159,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
         android:layout_marginTop="18dp"
-        android:background="@drawable/background_circle_white"
+        android:background="@drawable/background_circle"
         >
         <ImageView
             android:id="@+id/password_icon"
@@ -191,7 +191,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
         android:layout_marginTop="18dp"
-        android:background="@drawable/background_circle_white"
+        android:background="@drawable/background_circle"
         >
         <ImageView
             android:id="@+id/confirm_password_icon"

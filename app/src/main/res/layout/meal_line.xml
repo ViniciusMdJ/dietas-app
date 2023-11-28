@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/recycler_theme">
+    
+    <TextView
+        android:id="@+id/meal_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Café da manhã"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textColor="@color/gray"
+        android:layout_marginTop="10dp"
+        />
+    <LinearLayout
+        android:id="@+id/cal_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/meal_title"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp"
+        >
+        <ImageView
+            android:id="@+id/cal_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/cal"
+            android:layout_marginStart="25dp"
+            />
+
+        <TextView
+            android:id="@+id/cal_text"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="5dp"
+            android:text="- 2158 kcal"
+            android:textColor="@color/gray" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fat_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/cal_view"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="5dp"
+        >
+        <ImageView
+            android:id="@+id/fat_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/fat"
+            android:layout_marginStart="25dp"
+            />
+        <TextView
+            android:id="@+id/fat_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="- 200 g"
+            android:textColor="@color/gray"
+            android:layout_gravity="center"
+            android:layout_marginStart="5dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/protein_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/fat_view"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="5dp"
+        >
+        <ImageView
+            android:id="@+id/protein_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/protein"
+            android:layout_marginStart="25dp"
+            />
+        <TextView
+            android:id="@+id/protein_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="- 330 g"
+            android:textColor="@color/gray"
+            android:layout_gravity="center"
+            android:layout_marginStart="5dp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/carb_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/meal_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="70dp"
+        >
+        <ImageView
+            android:id="@+id/carb_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/carb"
+            />
+        <TextView
+            android:id="@+id/carb_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="- 460 g"
+            android:textColor="@color/gray"
+            android:layout_gravity="center"
+            android:layout_marginStart="5dp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/time_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/carb_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="58dp"
+        >
+        <ImageView
+            android:id="@+id/clock_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/baseline_access_time_24"
+            />
+        <TextView
+            android:id="@+id/clock_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="- 7 horas"
+            android:textColor="@color/gray"
+            android:layout_gravity="center"
+            android:layout_marginStart="5dp"
+            />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
