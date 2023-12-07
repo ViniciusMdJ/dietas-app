@@ -4,19 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUpActivity"
+    tools:context=".UI.MainActivity"
     android:background="@color/app_theme">
 
-    <ImageView
-        android:id="@+id/return_arrow"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/baseline_arrow_back_24"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="25dp"
-        android:layout_marginStart="25dp"
-        />
     <TextView
         android:id="@+id/register_title"
         android:layout_width="match_parent"
@@ -26,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="35dp"
         android:textSize="30dp"
         android:textColor="@color/white"
         />
@@ -145,8 +135,8 @@
             android:layout_marginBottom="2dp"
             android:hint="@string/phone_edit_text"
             android:textColor="@color/gray"
-            android:inputType="numberDecimal"
-            />
+            android:inputType="numberDecimal"/>
+            <!-- TODO("Adicionar mascara de telefone")-->
     </LinearLayout>
     <LinearLayout
         android:id="@+id/password_view"
