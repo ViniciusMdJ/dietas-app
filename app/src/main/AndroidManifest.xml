@@ -13,19 +13,19 @@
         android:theme="@style/Theme.DietasApp"
         tools:targetApi="31">
         <activity
-            android:name=".FoodsActivity"
+            android:name=".UI.FoodsActivity"
             android:exported="false" />
         <activity
-            android:name=".MealActivity"
+            android:name=".UI.MealActivity"
             android:exported="false" />
         <activity
-            android:name=".SignUpActivity"
+            android:name=".UI.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".UI.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".UI.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
