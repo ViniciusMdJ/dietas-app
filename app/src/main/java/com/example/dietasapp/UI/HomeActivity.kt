@@ -1,11 +1,12 @@
-package com.example.dietasapp
+package com.example.dietasapp.UI
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.dietasapp.R
 
-class MealActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_meal)
+        setContentView(R.layout.activity_home)
     }
 }
