@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         val navHostFrag = supportFragmentManager.findFragmentById(R.id.fragment_container_view_main) as NavHostFragment
         val navController = navHostFrag.navController
         val appBarConfiguration = AppBarConfiguration(navController.graph)
-        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
+        binding.toolbarMain.setupWithNavController(navController, appBarConfiguration)
     }
 
     fun setObserver(){
