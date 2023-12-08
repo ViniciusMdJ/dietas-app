@@ -17,6 +17,7 @@ class MainViewModel : ViewModel() {
     private var msgFail = MutableLiveData<String>()
 
     init {
+        auth.signOut()
         isAuth.value = (auth.currentUser != null)
     }
 

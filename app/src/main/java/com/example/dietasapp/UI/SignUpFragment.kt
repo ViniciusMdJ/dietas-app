@@ -1,13 +1,13 @@
 package com.example.dietasapp.UI
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import com.example.dietasapp.R
 import com.example.dietasapp.databinding.FragmentLoginBinding
 import com.example.dietasapp.databinding.FragmentSignUpBinding
@@ -55,12 +55,13 @@ class SignUpFragment : Fragment(), View.OnClickListener {
             val pass = binding.passwordEditText.text.toString()
             val confirmPass = binding.confirmPasswordEditText.text.toString()
 
-            if(name.isNullOrEmpty() || email.isNullOrEmpty() || phoneNumber.isNullOrEmpty() || pass.isNullOrEmpty() || confirmPass.isNullOrEmpty()){
-                Toast.makeText(context, "É nescessario preencher todos os campos", Toast.LENGTH_SHORT)
+            if(name.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || pass.isEmpty() || confirmPass.isEmpty()){
+                Log.v("teste", "$name $email $phoneNumber $pass $confirmPass")
+                Toast.makeText(context, "É nescessario preencher todos os campos", Toast.LENGTH_SHORT).show()
                 return
             }
             if(pass != confirmPass){
-                Toast.makeText(context, "As senhas estão diferentes", Toast.LENGTH_SHORT)
+                Toast.makeText(context, "As senhas estão diferentes", Toast.LENGTH_SHORT).show()
                 return
             }
 //            TODO("Implementar feedback para usuario que esta sendo criado o usuario")

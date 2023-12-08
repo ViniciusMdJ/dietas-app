@@ -1,5 +1,6 @@
 package com.example.dietasapp.UI
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -27,13 +28,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        mainVM = ViewModelProvider(this).get(MainViewModel::class.java)
-
-//        supportFragmentManager.commit {
-//            setReorderingAllowed(true)
-//            add<LoginFragment>(R.id.fragment_container_view_main)
-//        }
-
         setObserver()
         setToolbar()
     }
@@ -51,7 +45,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         mainVM.getIsAuth().observe(this){
-            Log.v("MAIN_ACTIVITY", "Logado: $it")
+            if(it){
+                startActivity(Intent(this, HomeActivity::class.java))
+                finish()
+            }
         }
     }
 }
