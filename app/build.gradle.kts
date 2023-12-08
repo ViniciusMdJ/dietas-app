@@ -57,4 +57,5 @@ dependencies {
     implementation("com.google.firebase:firebase-auth:22.3.0")
     implementation("com.google.firebase:firebase-auth-ktx:22.3.0")
     implementation("androidx.fragment:fragment-ktx:1.5.5")
+    implementation("com.github.santalu:maskara:1.0.0")
 }

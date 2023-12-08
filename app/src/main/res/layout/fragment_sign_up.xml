@@ -125,7 +125,7 @@
             android:layout_gravity="center"
             app:layout_constraintStart_toStartOf="parent"
             />
-        <EditText
+        <com.santalu.maskara.widget.MaskEditText
             android:id="@+id/phone_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -135,7 +135,11 @@
             android:layout_marginBottom="2dp"
             android:hint="@string/phone_edit_text"
             android:textColor="@color/gray"
-            android:inputType="numberDecimal"/>
+            android:inputType="numberDecimal"
+            app:mask="(__) _________"
+            app:maskCharacter="_"
+            app:maskStyle="completable"
+            />
             <!-- TODO("Adicionar mascara de telefone")-->
     </LinearLayout>
     <LinearLayout
@@ -215,6 +219,19 @@
         android:text="@string/register_new_account_text"
         android:backgroundTint="@color/gray"
         android:textColor="@color/black"
+        />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:indeterminate="true"
+        android:visibility="invisible"
+        android:indeterminateTint="@color/lime_green"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

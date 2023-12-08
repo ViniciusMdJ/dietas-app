@@ -1,6 +1,7 @@
 package com.example.dietasapp.UI
 
 import android.os.Bundle
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -31,18 +32,22 @@ class SignUpFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.registerButton.setOnClickListener(this)
+        binding.passwordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
+        binding.confirmPasswordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
 
         setObserver()
     }
 
     fun setObserver(){
         mainVM.getMsgFail().observe(viewLifecycleOwner) {
-            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+            binding.progressBar.visibility = View.INVISIBLE
+            Toast.makeText(context, resources.getString(it.toInt()), Toast.LENGTH_SHORT).show()
         }
 
         mainVM.getIsAuth().observe(viewLifecycleOwner){
             if(it){
-                Toast.makeText(context, "Deu certo login", Toast.LENGTH_SHORT).show()
+                binding.progressBar.visibility = View.INVISIBLE
+                Toast.makeText(context, R.string.toast_login_success, Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -51,21 +56,20 @@ class SignUpFragment : Fragment(), View.OnClickListener {
         if(v.id == R.id.register_button){
             val name = binding.userEditText.text.toString()
             val email = binding.emailEditText.text.toString()
-            val phoneNumber = binding.phoneEditText.text.toString()
+            val phoneNumber = binding.phoneEditText.unMasked
             val pass = binding.passwordEditText.text.toString()
             val confirmPass = binding.confirmPasswordEditText.text.toString()
 
             if(name.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || pass.isEmpty() || confirmPass.isEmpty()){
-                Log.v("teste", "$name $email $phoneNumber $pass $confirmPass")
-                Toast.makeText(context, "É nescessario preencher todos os campos", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, R.string.toast_set_all_fields, Toast.LENGTH_SHORT).show()
                 return
             }
             if(pass != confirmPass){
-                Toast.makeText(context, "As senhas estão diferentes", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, R.string.toast_password_diff, Toast.LENGTH_SHORT).show()
                 return
             }
-//            TODO("Implementar feedback para usuario que esta sendo criado o usuario")
 
+            binding.progressBar.visibility = View.VISIBLE
             mainVM.createUserWithEmailAndPassword(email, pass, name, phoneNumber)
         }
     }

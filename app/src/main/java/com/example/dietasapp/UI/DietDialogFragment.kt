@@ -48,7 +48,7 @@ class DietDialogFragment : DialogFragment(), View.OnClickListener {
             val title = binding.nameEditTextDietDialog.text.toString()
             val description = binding.descriptionEditTextDietDialog.text.toString()
             if(title.isEmpty() || description.isEmpty()){
-                Toast.makeText(context, "Preencha todos os campos", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, R.string.toast_fill_action, Toast.LENGTH_SHORT).show()
                 return
             }
             val d = DietModel(title, description)
