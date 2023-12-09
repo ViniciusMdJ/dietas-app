@@ -2,12 +2,13 @@ package com.example.dietasapp.UI.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.AdapterView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dietasapp.UI.viewHolder.ListDietsViewHolder
 import com.example.dietasapp.data.model.DietModel
 import com.example.dietasapp.databinding.DietLineBinding
 
-class ListDietAdapter : RecyclerView.Adapter<ListDietsViewHolder>() {
+class ListDietAdapter(): RecyclerView.Adapter<ListDietsViewHolder>() {
 
     private var dietList: List<DietModel> = listOf()
 

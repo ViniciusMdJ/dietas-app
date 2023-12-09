@@ -1,19 +1,17 @@
 package com.example.dietasapp.UI
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dietasapp.R
-import com.example.dietasapp.UI.adapter.ListDietAdapter
 import com.example.dietasapp.data.model.DietModel
 import com.example.dietasapp.databinding.FragmentDietDialogBinding
-import com.example.dietasapp.databinding.FragmentDietsBinding
 import com.example.dietasapp.viewModel.DietsViewModel
 
 class DietDialogFragment : DialogFragment(), View.OnClickListener {
@@ -58,6 +56,14 @@ class DietDialogFragment : DialogFragment(), View.OnClickListener {
         else if(v.id == R.id.cancel_button_diet_dialog){
             dismiss()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val params: ViewGroup.LayoutParams = dialog!!.window!!.attributes
+        params.width = ConstraintLayout.LayoutParams.MATCH_PARENT
+//        params.height = ConstraintLayout.LayoutParams.MATCH_PARENT
+        dialog!!.window!!.attributes = params as WindowManager.LayoutParams
     }
 
 }

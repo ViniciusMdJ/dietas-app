@@ -61,15 +61,4 @@ class DietsFragment : Fragment(), View.OnClickListener {
             DietDialogFragment().show(parentFragmentManager, "dialog")
         }
     }
-
-    fun createDialog() {
-        val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_diet, null)
-        dialogView
-
-        val mDialog = AlertDialog.Builder(context)
-            .setView(dialogView)
-            .setCancelable(false)
-            .setPositiveButton("OK", null)
-            .setNegativeButton("Cancel", null)
-    }
 }
