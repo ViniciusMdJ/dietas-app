@@ -221,17 +221,4 @@
         android:textColor="@color/black"
         />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:indeterminate="true"
-        android:visibility="invisible"
-        android:indeterminateTint="@color/lime_green"
-        />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

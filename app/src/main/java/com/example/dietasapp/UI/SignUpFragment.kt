@@ -18,6 +18,7 @@ class SignUpFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentSignUpBinding? = null
     private val binding get() = _binding!!
     private val mainVM: MainViewModel by activityViewModels()
+    private var signUpProgress: DialogProgressBar? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,19 +35,21 @@ class SignUpFragment : Fragment(), View.OnClickListener {
         binding.registerButton.setOnClickListener(this)
         binding.passwordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
         binding.confirmPasswordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
+        signUpProgress = context?.let { DialogProgressBar(it, "SignUp...") }
 
         setObserver()
     }
 
     fun setObserver(){
+        mainVM.resetMsgFail()
         mainVM.getMsgFail().observe(viewLifecycleOwner) {
-            binding.progressBar.visibility = View.INVISIBLE
+            signUpProgress?.progressDialog?.dismiss()
             Toast.makeText(context, resources.getString(it.toInt()), Toast.LENGTH_SHORT).show()
         }
 
         mainVM.getIsAuth().observe(viewLifecycleOwner){
             if(it){
-                binding.progressBar.visibility = View.INVISIBLE
+                signUpProgress?.progressDialog?.dismiss()
                 Toast.makeText(context, R.string.toast_login_success, Toast.LENGTH_SHORT).show()
             }
         }
@@ -69,7 +72,7 @@ class SignUpFragment : Fragment(), View.OnClickListener {
                 return
             }
 
-            binding.progressBar.visibility = View.VISIBLE
+            signUpProgress?.progressDialog?.show()
             mainVM.createUserWithEmailAndPassword(email, pass, name, phoneNumber)
         }
     }
