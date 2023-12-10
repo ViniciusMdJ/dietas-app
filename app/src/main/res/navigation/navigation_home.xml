@@ -4,6 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_home"
     app:startDestination="@id/homeFragment">
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.example.dietasapp.UI.UserProfileFragment"
+        android:label="User Profile"
+        tools:layout="@layout/fragment_user_profile">
+    </fragment>
 
     <fragment
         android:id="@+id/homeFragment"

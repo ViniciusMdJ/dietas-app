@@ -15,6 +15,11 @@ class UserProfileViewModel: ViewModel()  {
     private var phone = MutableLiveData<String>()
     private var email = MutableLiveData<String>()
     private var msg = MutableLiveData<String>()
+    private var isLoggedOut = MutableLiveData<Boolean>()
+
+    init {
+        isLoggedOut.value = false
+    }
 
     fun getMsg(): MutableLiveData<String> {
         return msg
@@ -30,6 +35,9 @@ class UserProfileViewModel: ViewModel()  {
     }
     fun getEmail(): LiveData<String> {
         return email
+    }
+    fun logOutEvent(): LiveData<Boolean> {
+        return isLoggedOut
     }
 
     fun getUserData(){
@@ -66,5 +74,6 @@ class UserProfileViewModel: ViewModel()  {
     }
     fun logOut(){
         Utils.Firestore.logOutFunction()
+        isLoggedOut.value = true
     }
 }

@@ -45,4 +45,14 @@
     <string name="set_old_passowrd">Digite a sua senha antiga</string>
     <string name="update_success">Perfil Atualizado com Sucesso</string>
     <string name="update_problem">Não foi possível atualizar o perfil</string>
+    <string name="insert_hours">Insira o horário</string>
+    <string name="meal_name">Nome da Refeição</string>
+    <string name="new_meal_title">Nova Refeição</string>
+    <string name="new_diet_title">Nova Dieta</string>
+    <string name="new_diet_name">Nome da Dieta</string>
+    <string name="new_diet_description">Descrição para a Dieta</string>
+    <string name="new_aliment_title">Novo Alimento</string>
+    <string name="new_aliment_name">Nome do Alimento</string>
+    <string name="new_aliment_weight">Peso do Alimento (gramas)</string>
+    <string name="new_aliment_description">Descrição para o Alimento</string>
 </resources>

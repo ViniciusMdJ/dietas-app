@@ -18,7 +18,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
     private val mainVM: MainViewModel by activityViewModels()
-    private var loginProgress: DialogProgressBar? = null
+    private lateinit var loginProgress: DialogProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +35,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
         binding.loginButton.setOnClickListener(this)
         binding.registerText.setOnClickListener(this)
         binding.passwordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
-        loginProgress = context?.let { DialogProgressBar(it, "Login...") }
+        loginProgress = context?.let { DialogProgressBar(it, "Login...") }!!
 
         setObserver()
     }
@@ -43,13 +43,13 @@ class LoginFragment : Fragment(), View.OnClickListener {
     fun setObserver(){
         mainVM.resetMsgFail()
         mainVM.getMsgFail().observe(viewLifecycleOwner) {
-            loginProgress?.progressDialog?.dismiss()
+            loginProgress.progressDialog?.dismiss()
             Toast.makeText(context, resources.getString(it.toInt()), Toast.LENGTH_SHORT).show()
         }
 
         mainVM.getIsAuth().observe(viewLifecycleOwner){
             if(it){
-                loginProgress?.progressDialog?.dismiss()
+                loginProgress.progressDialog?.dismiss()
                 Toast.makeText(context, R.string.toast_login_success, Toast.LENGTH_SHORT).show()
             }
         }
@@ -60,10 +60,10 @@ class LoginFragment : Fragment(), View.OnClickListener {
             val email = binding.emailEditText.text.toString()
             val pass = binding.passwordEditText.text.toString()
 
-            loginProgress?.progressDialog?.show()
+            loginProgress.progressDialog?.show()
             val response = mainVM.signInWithEmailAndPassword(email, pass)
             if(!response) {
-                loginProgress?.progressDialog?.dismiss()
+                loginProgress.progressDialog?.dismiss()
             }
         }else if(v.id == R.id.register_text){
             findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)

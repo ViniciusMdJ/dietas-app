@@ -17,7 +17,7 @@ class Utils {
         const val FieldUserPhoneNumber = "numeroTelefone"
         const val FieldUserName = "nome"
 
-        private fun getUserDocRef(): DocumentReference {
+        fun getUserDocRef(): DocumentReference {
             return db.collection(CollectionUser).document(auth.currentUser!!.uid)
         }
 
@@ -31,6 +31,7 @@ class Utils {
 
         fun getUserMealsColRef(id: String): CollectionReference {
             return getUserMealDocRef(id).collection(CollectionsMeal)
+        }
 
         fun getUserData(): Task<DocumentSnapshot> {
             return getUserDocRef().get()

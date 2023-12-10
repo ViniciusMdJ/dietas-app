@@ -16,6 +16,7 @@ class UserProfileFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentUserProfileBinding? = null
     private val binding get() = _binding!!
     private val userProfileVM: UserProfileViewModel by activityViewModels()
+    private lateinit var savePB: DialogProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,7 +35,7 @@ class UserProfileFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         binding.saveButton.setOnClickListener(this)
         binding.logoutButton.setOnClickListener(this)
-        binding.deleteAccountButton.setOnClickListener(this)
+        savePB = context?.let { DialogProgressBar(it, "Saving...") }!!
 
         setObserver()
         userProfileVM.getUserData()
@@ -51,21 +52,29 @@ class UserProfileFragment : Fragment(), View.OnClickListener {
         }
         userProfileVM.resetMsg()
         userProfileVM.getMsg().observe(viewLifecycleOwner) {
-//            signUpProgress?.progressDialog?.dismiss()
             Toast.makeText(context, resources.getString(it.toInt()), Toast.LENGTH_SHORT).show()
+            savePB.progressDialog?.dismiss()
+        }
+        userProfileVM.logOutEvent().observe(viewLifecycleOwner) { isLoggedOut ->
+            if (isLoggedOut) {
+                navigateToLogin()
+            }
         }
     }
     override fun onClick(v: View) {
         if(v.id == R.id.save_button){
+            savePB.progressDialog?.show()
             val newName = binding.userEditText.text.toString()
             val newPhone = binding.phoneEditText.unMasked
             userProfileVM.setNewUserData(newName, newPhone)
-
-        }else if(v.id == R.id.delete_account_button){
-
         }else if(v.id == R.id.logout_button){
             userProfileVM.logOut()
-
         }
+    }
+    private fun navigateToLogin() {
+        val intent = Intent(requireContext(), MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        requireActivity().finish()
     }
 }
