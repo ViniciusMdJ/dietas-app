@@ -17,13 +17,20 @@ class Utils {
         const val FieldUserPhoneNumber = "numeroTelefone"
         const val FieldUserName = "nome"
 
-        fun getUserDocRef(): DocumentReference {
+        private fun getUserDocRef(): DocumentReference {
             return db.collection(CollectionUser).document(auth.currentUser!!.uid)
         }
 
         fun getUserDietsColRef(): CollectionReference {
             return getUserDocRef().collection(CollectionsDiet)
         }
+
+        fun getUserMealDocRef(id: String): DocumentReference {
+            return getUserDietsColRef().document(id)
+        }
+
+        fun getUserMealsColRef(id: String): CollectionReference {
+            return getUserMealDocRef(id).collection(CollectionsMeal)
 
         fun getUserData(): Task<DocumentSnapshot> {
             return getUserDocRef().get()
@@ -35,6 +42,7 @@ class Utils {
 
         fun logOutFunction() {
             return auth.signOut()
+
         }
     }
 }

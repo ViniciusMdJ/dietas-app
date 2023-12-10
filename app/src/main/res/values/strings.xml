@@ -34,6 +34,7 @@
     <string name="toast_wrong_user_password">Usuario ou senha estão errados</string>
     <string name="toast_insert_email">Insira o email</string>
     <string name="toast_insert_password">Insira a senha</string>
+    <string name="toast_fill_time">Selecione um horário</string>
     <string name="in_loggin">Logando</string>
     <string name="user_data">Dados de Perfil</string>
     <string name="save_text">Salvar</string>

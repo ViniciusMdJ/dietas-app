@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.DietsFragment"
+    tools:context=".UI.FoodsFragment"
     android:background="@color/app_theme">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_list_diets"
-        android:layout_width="match_parent"
+        android:id="@+id/recycler_list_foods"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -18,9 +18,10 @@
         />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floating_action_button_add_diet"
+        android:id="@+id/floating_action_button_add_foods"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:clickable="true"
         android:src="@drawable/add"
         app:maxImageSize="45dp"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.FloatingActionButton"
@@ -28,5 +29,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
