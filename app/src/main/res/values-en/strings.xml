@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="app_name">DietApp</string>
+    <string name="welcome_text">Your Diet App</string>
+    <string name="password_text">Password</string>
+    <string name="confirm_password_text">Confirm password</string>
+    <string name="register_question">Don\'t have an account?</string>
+    <string name="register_text">Sign Up</string>
+    <string name="register_activity_title">Sign Up</string>
+    <string name="register_welcome_text">Make your account and start your diets</string>
+    <string name="user_name_text">User name</string>
+    <string name="email_edit_text">Email address</string>
+    <string name="phone_edit_text">Phone Number</string>
+    <string name="register_new_account_text">Create your Account</string>
+    <string name="my_diets">My Diets</string>
+    <string name="meal_title">Meals for this diet</string>
+    <string name="time_string">Set time: 7 hours</string>
+    <string name="foods_title">Food for this meal</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="create">Create</string>
+    <string name="toast_fill_action">Fill in all fields</string>
+    <string name="toast_login_success">Login Completed</string>
+    <string name="toast_set_all_fields">You must fill in all fields</string>
+    <string name="toast_password_diff">Passwords are different</string>
+    <string name="toast_weak_password">Your password must be at least 6 characters</string>
+    <string name="toast_invalid_email">Invalid email address</string>
+    <string name="toast_used_email">This email is already registered</string>
+    <string name="toast_generic_singup_error">Failed to register user</string>
+    <string name="toast_internet_error">Failed to connect to the internet</string>
+    <string name="toast_wrong_user_password">Username or password are wrong</string>
+    <string name="toast_insert_email">Enter email</string>
+    <string name="toast_insert_password">Enter password</string>
+    <string name="toast_fill_time">Select a time</string>
+    <string name="in_loggin">Logging in</string>
+    <string name="user_data">Profile Data</string>
+    <string name="save_text">Save</string>
+    <string name="logout_text">Log out</string>
+    <string name="update_success">Profile Updated Successfully</string>
+    <string name="update_problem">Unable to update profile</string>
+    <string name="insert_hours">Enter time</string>
+    <string name="meal_name">Meal Name</string>
+    <string name="new_meal_title">New Meal</string>
+    <string name="new_diet_title">New Diet</string>
+    <string name="new_diet_name">Diet Name</string>
+    <string name="new_diet_description">Description for the Diet</string>
+    <string name="new_aliment_title">New Food</string>
+    <string name="new_aliment_name">Food Name</string>
+    <string name="new_aliment_weight">Food Weight (grams)</string>
+    <string name="new_aliment_description">Description for the Food</string>
+</resources>
