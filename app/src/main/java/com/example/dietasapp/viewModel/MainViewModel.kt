@@ -29,6 +29,10 @@ class MainViewModel : ViewModel() {
         return isAuth
     }
 
+    fun resetMsgFail(){
+        msgFail = MutableLiveData<String>()
+    }
+
     fun getMsgFail(): LiveData<String> {
         return msgFail
     }

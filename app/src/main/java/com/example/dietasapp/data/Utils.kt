@@ -1,8 +1,10 @@
 package com.example.dietasapp.data
 
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 
 class Utils {
@@ -29,6 +31,18 @@ class Utils {
 
         fun getUserMealsColRef(id: String): CollectionReference {
             return getUserMealDocRef(id).collection(CollectionsMeal)
+
+        fun getUserData(): Task<DocumentSnapshot> {
+            return getUserDocRef().get()
+        }
+
+        fun getUserEmail(): String? {
+            return auth.currentUser?.email
+        }
+
+        fun logOutFunction() {
+            return auth.signOut()
+
         }
     }
 }
