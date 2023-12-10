@@ -7,61 +7,20 @@
     tools:context=".UI.DietsFragment"
     android:background="@color/app_theme">
 
-
-    <LinearLayout
-        android:id="@+id/search_bar_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:orientation="horizontal"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginTop="35dp"
-        android:background="@drawable/background_circle"
-        android:backgroundTint="@color/dark_gray"
-        >
-        <ImageView
-            android:id="@+id/search_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/baseline_search_24"
-            android:layout_marginStart="20dp"
-            android:layout_gravity="center"
-            app:layout_constraintStart_toStartOf="parent"
-            />
-        <EditText
-            android:id="@+id/user_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="2dp"
-            android:hint="@string/search"
-            android:textColorHint="@color/gray"
-            />
-    </LinearLayout>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_list_diets"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/search_bar_view"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
         />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floating_action_button_add_diet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="true"
         android:src="@drawable/add"
         app:maxImageSize="45dp"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.FloatingActionButton"

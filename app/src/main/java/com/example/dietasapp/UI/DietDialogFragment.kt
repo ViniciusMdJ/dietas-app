@@ -62,7 +62,7 @@ class DietDialogFragment : DialogFragment(), View.OnClickListener {
         super.onResume()
         val params: ViewGroup.LayoutParams = dialog!!.window!!.attributes
         params.width = ConstraintLayout.LayoutParams.MATCH_PARENT
-//        params.height = ConstraintLayout.LayoutParams.MATCH_PARENT
+        params.height = ConstraintLayout.LayoutParams.WRAP_CONTENT
         dialog!!.window!!.attributes = params as WindowManager.LayoutParams
     }
 

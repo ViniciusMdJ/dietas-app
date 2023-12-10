@@ -6,6 +6,7 @@ import com.example.dietasapp.databinding.DietLineBinding
 
 class ListDietsViewHolder(private val binding: DietLineBinding) : RecyclerView.ViewHolder(binding.root) {
 
+
     fun bindVH(diet: DietModel){
         binding.title.text = diet.title
         binding.descText.text = diet.description

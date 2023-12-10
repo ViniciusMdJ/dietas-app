@@ -1,25 +1,28 @@
 package com.example.dietasapp.UI
 
-import android.app.AlertDialog
-import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dietasapp.R
 import com.example.dietasapp.UI.adapter.ListDietAdapter
+import com.example.dietasapp.data.intefaces.DietsInterface
+import com.example.dietasapp.data.model.DietModel
+import com.example.dietasapp.data.model.MealModel
+import com.example.dietasapp.databinding.DietLineBinding
 import com.example.dietasapp.databinding.FragmentDietsBinding
 import com.example.dietasapp.viewModel.DietsViewModel
 
-class DietsFragment : Fragment(), View.OnClickListener {
+class DietsFragment : Fragment(), View.OnClickListener, DietsInterface {
     private var _binding: FragmentDietsBinding? = null
     private val binding get() = _binding!!
     private val dietVM: DietsViewModel by activityViewModels()
-    private val adapter = ListDietAdapter()
+    private lateinit var adapter: ListDietAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +31,7 @@ class DietsFragment : Fragment(), View.OnClickListener {
         super.onCreateView(inflater, container, savedInstanceState)
         _binding = FragmentDietsBinding.inflate(inflater, container, false)
 
+        dietVM.updateAllDietsDB()
         return binding.root
     }
 
@@ -39,13 +43,14 @@ class DietsFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        adapter = ListDietAdapter(this)
+
         binding.recyclerListDiets.layoutManager = LinearLayoutManager(context)
         binding.recyclerListDiets.adapter = adapter
 
         binding.floatingActionButtonAddDiet.setOnClickListener(this)
 
         setObserver()
-        dietVM.updateAllDietsDB()
     }
 
     private fun setObserver(){
@@ -59,6 +64,17 @@ class DietsFragment : Fragment(), View.OnClickListener {
 //            val d = DietModel("titulo", "descrição")
 //            dietVM.createDiet(d)
             DietDialogFragment().show(parentFragmentManager, "dialog")
+        }
+    }
+
+    override fun setDietsClickListener(d: DietModel, binding: DietLineBinding) {
+        binding.root.setOnClickListener {
+            val action = DietsFragmentDirections.actionHomeFragmentToMealFragment(d)
+            findNavController().navigate(action)
+        }
+        binding.editIconDiet.setOnClickListener {
+            Toast.makeText(context, "Clicou em editar ${d.title}", Toast.LENGTH_SHORT).show()
+//            TODO("Implementar a edição de dieta")
         }
     }
 }

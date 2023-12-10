@@ -16,12 +16,13 @@ class DietsViewModel: ViewModel() {
     }
 
     fun updateAllDietsDB(){
-        var colDietRef = Utils.Firestore.getUserDietsColRef()
+        val colDietRef = Utils.Firestore.getUserDietsColRef()
 
         colDietRef.get().addOnSuccessListener {
-            var list = mutableListOf<DietModel>()
+            val list = mutableListOf<DietModel>()
             for (doc in it){
-                var diet = doc.toObject(DietModel::class.java)
+                val diet = doc.toObject(DietModel::class.java)
+                diet.id = doc.id
                 list.add(diet)
             }
             listDiets.value = list
@@ -32,7 +33,7 @@ class DietsViewModel: ViewModel() {
     }
 
     fun createDiet(diet: DietModel){
-        var colDietRef = Utils.Firestore.getUserDietsColRef()
+        val colDietRef = Utils.Firestore.getUserDietsColRef()
         colDietRef.add(diet)
             .addOnSuccessListener {
                 Log.i("DietsViewModel", "Dieta criada com sucesso")
