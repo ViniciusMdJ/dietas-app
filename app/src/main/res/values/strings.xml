@@ -35,4 +35,13 @@
     <string name="toast_insert_email">Insira o email</string>
     <string name="toast_insert_password">Insira a senha</string>
     <string name="in_loggin">Logando</string>
+    <string name="user_data">Dados de Perfil</string>
+    <string name="save_text">Salvar</string>
+    <string name="delete_account">Excluir Conta</string>
+    <string name="logout_text">Sair da Conta</string>
+    <string name="new_password_text">Nova Senha (Opcional)</string>
+    <string name="old_password_text">Senha Antiga (Obrigatória)</string>
+    <string name="set_old_passowrd">Digite a sua senha antiga</string>
+    <string name="update_success">Perfil Atualizado com Sucesso</string>
+    <string name="update_problem">Não foi possível atualizar o perfil</string>
 </resources>
