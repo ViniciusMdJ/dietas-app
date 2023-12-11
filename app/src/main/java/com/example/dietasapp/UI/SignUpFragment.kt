@@ -12,6 +12,9 @@ import com.example.dietasapp.R
 import com.example.dietasapp.databinding.FragmentSignUpBinding
 import com.example.dietasapp.viewModel.MainViewModel
 
+/**
+ * Fragment for user sign-up.
+ */
 class SignUpFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentSignUpBinding? = null
     private val binding get() = _binding!!
@@ -54,18 +57,18 @@ class SignUpFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(v: View) {
-        if(v.id == R.id.register_button){
+        if (v.id == R.id.register_button) {
             val name = binding.userEditText.text.toString()
             val email = binding.emailEditText.text.toString()
             val phoneNumber = binding.phoneEditText.unMasked
             val pass = binding.passwordEditText.text.toString()
             val confirmPass = binding.confirmPasswordEditText.text.toString()
 
-            if(name.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || pass.isEmpty() || confirmPass.isEmpty()){
+            if (name.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || pass.isEmpty() || confirmPass.isEmpty()) {
                 Toast.makeText(context, R.string.toast_set_all_fields, Toast.LENGTH_SHORT).show()
                 return
             }
-            if(pass != confirmPass){
+            if (pass != confirmPass) {
                 Toast.makeText(context, R.string.toast_password_diff, Toast.LENGTH_SHORT).show()
                 return
             }

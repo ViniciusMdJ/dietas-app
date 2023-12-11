@@ -12,32 +12,52 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.google.firebase.firestore.FirebaseFirestore
-
+/**
+ * ViewModel for managing authentication and user-related data.
+ */
 class MainViewModel : ViewModel() {
-
     private val auth = FirebaseAuth.getInstance()
     private val db = FirebaseFirestore.getInstance()
     private var isAuth = MutableLiveData<Boolean>()
     private var msgFail = MutableLiveData<String>()
 
+    /**
+     * Initializes the ViewModel by checking the current user authentication status.
+     */
     init {
-//        auth.signOut()
         isAuth.value = (auth.currentUser != null)
     }
 
+    /**
+     * Get LiveData for the user authentication status.
+     * @return LiveData containing the authentication status.
+     */
     fun getIsAuth(): LiveData<Boolean> {
         return isAuth
     }
 
+    /**
+     * Reset the LiveData for failure messages.
+     */
     fun resetMsgFail(){
         msgFail = MutableLiveData<String>()
     }
 
+    /**
+     * Get LiveData for displaying failure messages.
+     * @return LiveData containing the failure messages.
+     */
     fun getMsgFail(): LiveData<String> {
         return msgFail
     }
 
-    fun signInWithEmailAndPassword(email: String, pass: String) : Boolean{
+    /**
+     * Attempt to sign in with the provided email and password.
+     * @param email The user's email.
+     * @param pass The user's password.
+     * @return Boolean Returns true if the sign-in request is initiated.
+     */
+    fun signInWithEmailAndPassword(email: String, pass: String): Boolean{
         if (email.isEmpty()) {
             msgFail.value = R.string.toast_insert_email.toString()
             return false
@@ -58,6 +78,13 @@ class MainViewModel : ViewModel() {
         return true
     }
 
+    /**
+     * Create a new user account with the provided email, password, name, and phone number.
+     * @param email The user's email.
+     * @param pass The user's password.
+     * @param name The user's name.
+     * @param phoneNumber The user's phone number.
+     */
     fun createUserWithEmailAndPassword(email: String, pass: String, name: String, phoneNumber: String) {
         auth.createUserWithEmailAndPassword(email, pass)
             .addOnCompleteListener {

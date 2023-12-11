@@ -21,6 +21,9 @@ import com.example.dietasapp.databinding.FoodLineBinding
 import com.example.dietasapp.databinding.FragmentFoodsBinding
 import com.example.dietasapp.viewModel.FoodUserViewModel
 
+/**
+ * Fragment for displaying a list of food items associated with a meal.
+ */
 class FoodUserFragment : Fragment(), View.OnClickListener, FoodsInterface {
     private var _binding: FragmentFoodsBinding? = null
     private val binding get() = _binding!!
@@ -72,6 +75,12 @@ class FoodUserFragment : Fragment(), View.OnClickListener, FoodsInterface {
         }
     }
 
+    /**
+     * Implements the interface function to handle clicks on food items.
+     *
+     * @param f The clicked FoodUserModel.
+     * @param binding The binding object for the clicked item view.
+     */
     override fun setFoodsClickListener(f: FoodUserModel, binding: FoodLineBinding) {
         binding.editIconFood.setOnClickListener {
             FoodUserDialogFragment.newInstance(f).show(parentFragmentManager, "dialog")

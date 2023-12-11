@@ -10,10 +10,10 @@ class ListFoodUserViewHolder(private val binding: FoodLineBinding) : RecyclerVie
     fun bindVH(food: FoodUserModel){
         binding.foodTitleText.text = food.title
         binding.foodDescriptionText.text = food.description
-        binding.calText.text = food.calorie.toString()
-        binding.carbText.text = food.carbohydrate.toString()
-        binding.proteinText.text = food.protein.toString()
-        binding.fatText.text = food.fat.toString()
+        binding.calText.text = food.calorie.toString() + " kcal"
+        binding.carbText.text = food.carbohydrate.toString() + " g"
+        binding.proteinText.text = food.protein.toString() + " g"
+        binding.fatText.text = food.fat.toString() + " g"
     }
 
 }

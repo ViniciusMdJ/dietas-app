@@ -13,8 +13,10 @@ import com.example.dietasapp.R
 import com.example.dietasapp.databinding.FragmentLoginBinding
 import com.example.dietasapp.viewModel.MainViewModel
 
+/**
+ * Fragment for handling user login.
+ */
 class LoginFragment : Fragment(), View.OnClickListener {
-
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
     private val mainVM: MainViewModel by activityViewModels()

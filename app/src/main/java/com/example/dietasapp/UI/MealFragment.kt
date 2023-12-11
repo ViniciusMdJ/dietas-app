@@ -20,6 +20,10 @@ import com.example.dietasapp.databinding.FragmentMealBinding
 import com.example.dietasapp.databinding.MealLineBinding
 import com.example.dietasapp.viewModel.MealsViewModel
 
+
+/**
+ * A fragment for displaying and managing meals.
+ */
 class MealFragment : Fragment(), View.OnClickListener, MealsInterface {
     private var _binding: FragmentMealBinding? = null
     private val binding get() = _binding!!
@@ -60,18 +64,21 @@ class MealFragment : Fragment(), View.OnClickListener, MealsInterface {
         setObserver()
     }
 
-    private fun setObserver(){
+    private fun setObserver() {
         mealVM.getListMeals().observe(viewLifecycleOwner) {
             adapter.updateMealList(it)
         }
     }
 
     override fun onClick(p0: View?) {
-        if (p0?.id == R.id.floating_action_button_add_meal){
+        if (p0?.id == R.id.floating_action_button_add_meal) {
             MealDialogFragment().show(parentFragmentManager, "dialog")
         }
     }
 
+    /**
+     * Implementation of the MealsInterface to handle clicks on meals.
+     */
     override fun setMealsClickListener(m: MealModel, binding: MealLineBinding) {
         binding.root.setOnClickListener {
             val action = MealFragmentDirections.actionMealFragmentToFoodsFragment(m)

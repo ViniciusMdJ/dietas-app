@@ -14,40 +14,66 @@ class DietsViewModel: ViewModel() {
     private var user = MutableLiveData<UserModel>()
     private var favoriteDiet = MutableLiveData<String>()
 
+    /**
+     * Initialization block to set default values and fetch user data from Firestore.
+     */
     init {
         listDiets.value = mutableListOf()
         getUserFirestore()
     }
 
-    fun getListDiets(): LiveData<MutableList<DietModel>>{
+    /**
+     * Get LiveData for the list of diets.
+     * @return LiveData containing the list of diets.
+     */
+    fun getListDiets(): LiveData<MutableList<DietModel>> {
         return listDiets
     }
 
+    /**
+     * Get LiveData for the user data.
+     * @return LiveData containing the user.
+     */
     fun getUser(): LiveData<UserModel> {
         return user
     }
 
+    /**
+     * Get LiveData for the favorite diet ID.
+     * @return LiveData containing the favorite diet ID.
+     */
     fun getFavoriteDiet(): LiveData<String> {
         return favoriteDiet
     }
 
+    /**
+     * Set the favorite diet and update it in Firestore.
+     * @param dietId The ID of the diet to be set as the favorite.
+     */
     fun setFavoriteDiet(dietId: String){
         updateFavoriteDiet(dietId)
         favoriteDiet.value = dietId
     }
 
-    fun updateFavoriteDiet(dietId: String){
+    /**
+     * Update the favorite diet ID in Firestore.
+     * @param dietId The ID of the diet to be set as the favorite.
+     */
+    private fun updateFavoriteDiet(dietId: String) {
         val docUserRef = Utils.Firestore.getUserDocRef()
         docUserRef.update("dietaFavorita", dietId)
             .addOnSuccessListener {
-                Log.i("DietsViewModel", "Dieta favorita atualizada com sucesso")
+                Log.i("DietsViewModel", "Favorite diet updated successfully")
             }
             .addOnFailureListener {
-                Log.e("DietsViewModel", "Erro ao atualizar dieta favorita")
+                Log.e("DietsViewModel", "Failed to update favorite diet")
             }
     }
 
-    private fun getUserFirestore(){
+    /**
+     * Fetch user data from Firestore.
+     */
+    private fun getUserFirestore() {
         Utils.Firestore.getUserData().addOnSuccessListener {
             val user = it.toObject(UserModel::class.java)
             if (user != null) {
@@ -58,12 +84,15 @@ class DietsViewModel: ViewModel() {
         }
     }
 
-    fun updateAllDietsDB(){
+    /**
+     * Update the list of diets from Firestore.
+     */
+    fun updateAllDietsDB() {
         val colDietRef = Utils.Firestore.getUserDietsColRef()
 
         colDietRef.get().addOnSuccessListener {
             val list = mutableListOf<DietModel>()
-            for (doc in it){
+            for (doc in it) {
                 val diet = doc.toObject(DietModel::class.java)
                 diet.id = doc.id
                 list.add(diet)
@@ -71,44 +100,56 @@ class DietsViewModel: ViewModel() {
             listDiets.value = list
         }
             .addOnFailureListener {
-                Log.e("DietsViewModel", "Erro ao buscar dietas")
+                Log.e("DietsViewModel", "Failed to fetch diets")
             }
     }
 
-    fun createDiet(diet: DietModel){
+    /**
+     * Create a new diet in Firestore.
+     * @param diet The diet to be created.
+     */
+    fun createDiet(diet: DietModel) {
         val colDietRef = Utils.Firestore.getUserDietsColRef()
         colDietRef.add(diet)
             .addOnSuccessListener {
-                Log.i("DietsViewModel", "Dieta criada com sucesso")
+                Log.i("DietsViewModel", "Diet created successfully")
                 updateAllDietsDB()
             }
             .addOnFailureListener {
-                Log.e("DietsViewModel", "Erro ao criar dieta")
+                Log.e("DietsViewModel", "Failed to create diet")
             }
     }
 
-    fun deleteDiet(dietId: String){
+    /**
+     * Delete a diet from Firestore.
+     * @param dietId The ID of the diet to be deleted.
+     */
+    fun deleteDiet(dietId: String) {
         val colDietRef = Utils.Firestore.getUserDietsColRef()
         colDietRef.document(dietId).delete()
             .addOnSuccessListener {
-                Log.i("DietsViewModel", "Dieta deletada com sucesso")
+                Log.i("DietsViewModel", "Diet deleted successfully")
                 updateAllDietsDB()
             }
             .addOnFailureListener {
-                Log.e("DietsViewModel", "Erro ao deletar dieta")
+                Log.e("DietsViewModel", "Failed to delete diet")
             }
-   }
+    }
 
-    fun updateDiet(diet: DietModel){
+    /**
+     * Update an existing diet in Firestore.
+     * @param diet The updated diet information.
+     */
+    fun updateDiet(diet: DietModel) {
         val colDietRef = Utils.Firestore.getUserDietsColRef()
         colDietRef.document(diet.id)
             .update("title", diet.title, "description", diet.description)
             .addOnSuccessListener {
-                Log.i("DietsViewModel", "Dieta atualizada com sucesso")
+                Log.i("DietsViewModel", "Diet updated successfully")
                 updateAllDietsDB()
             }
             .addOnFailureListener {
-                Log.e("DietsViewModel", "Erro ao atualizar dieta")
+                Log.e("DietsViewModel", "Failed to update diet")
             }
     }
 }

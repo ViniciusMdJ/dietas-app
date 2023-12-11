@@ -14,7 +14,9 @@ import com.example.dietasapp.databinding.ActivityHomeBinding
 import com.example.dietasapp.databinding.ActivityMainBinding
 import com.example.dietasapp.viewModel.MainViewModel
 import com.google.firebase.FirebaseApp
-
+/**
+ * Activity representing the main home screen.
+ */
 class HomeActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityHomeBinding
     private val mainVM: MainViewModel by viewModels()

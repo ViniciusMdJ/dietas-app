@@ -14,14 +14,26 @@ import com.example.dietasapp.data.model.DietModel
 import com.example.dietasapp.databinding.FragmentDietDialogBinding
 import com.example.dietasapp.viewModel.DietsViewModel
 
+/**
+ * DialogFragment for creating or editing a diet.
+ */
 class DietDialogFragment : DialogFragment(), View.OnClickListener {
     private var _binding: FragmentDietDialogBinding? = null
     private val binding get() = _binding!!
     private val dietVM: DietsViewModel by activityViewModels()
-
     private lateinit var diet: DietModel
 
+    /**
+     * Companion object providing factory methods for creating instances of DietDialogFragment.
+     */
     companion object {
+
+        /**
+         * Creates a new instance of DietDialogFragment with the specified [diet].
+         *
+         * @param diet The DietModel to be edited.
+         * @return A new instance of DietDialogFragment.
+         */
         fun newInstance(d: DietModel): DietDialogFragment {
             val f = DietDialogFragment()
 
@@ -31,6 +43,11 @@ class DietDialogFragment : DialogFragment(), View.OnClickListener {
             return f
         }
 
+        /**
+         * Creates a new instance of DietDialogFragment for creating a new diet.
+         *
+         * @return A new instance of DietDialogFragment.
+         */
         fun newInstance(): DietDialogFragment {
             return DietDialogFragment()
         }
@@ -41,7 +58,6 @@ class DietDialogFragment : DialogFragment(), View.OnClickListener {
         if(arguments?.containsKey("diet") == true){
             diet = arguments?.getSerializable("diet") as DietModel
         }
-
     }
 
     override fun onCreateView(
@@ -50,7 +66,6 @@ class DietDialogFragment : DialogFragment(), View.OnClickListener {
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         _binding = FragmentDietDialogBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
@@ -100,5 +115,4 @@ class DietDialogFragment : DialogFragment(), View.OnClickListener {
         params.height = ConstraintLayout.LayoutParams.WRAP_CONTENT
         dialog!!.window!!.attributes = params as WindowManager.LayoutParams
     }
-
 }
