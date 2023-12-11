@@ -1,8 +1,8 @@
 package com.example.dietasapp.data.intefaces
 
-import com.example.dietasapp.data.model.FoodUserModel
-import com.example.dietasapp.databinding.FoodLineBinding
+import com.example.dietasapp.data.model.FoodModel
+import com.example.dietasapp.databinding.FoodSearchLineBinding
 
 interface FoodsInterface {
-    fun setFoodsClickListener(f: FoodUserModel, binding: FoodLineBinding)
+    fun setFoodsClickListener(food: FoodModel, binding: FoodSearchLineBinding)
 }
