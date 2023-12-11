@@ -1,7 +1,6 @@
 package com.example.dietasapp.UI
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,23 +10,46 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.example.dietasapp.R
-import com.example.dietasapp.data.model.MealModel
-import com.example.dietasapp.databinding.FragmentFoodDialogBinding
-import com.example.dietasapp.databinding.FragmentMealDialogBinding
-import com.example.dietasapp.viewModel.FoodsViewModel
-import com.example.dietasapp.viewModel.MealsViewModel
+import com.example.dietasapp.data.model.FoodUserModel
+import com.example.dietasapp.databinding.FragmentFoodUserDialogBinding
+import com.example.dietasapp.viewModel.FoodUserViewModel
 
-class FoodDialogFragment : DialogFragment(), View.OnClickListener {
-    private var _binding: FragmentFoodDialogBinding? = null
+class FoodUserDialogFragment : DialogFragment(), View.OnClickListener {
+    private var _binding: FragmentFoodUserDialogBinding? = null
     private val binding get() = _binding!!
-    private val mealVM: FoodsViewModel by activityViewModels()
+    private val foodUserVM: FoodUserViewModel by activityViewModels()
+
+    private lateinit var foodUser: FoodUserModel
+
+    companion object {
+        fun newInstance(f: FoodUserModel): FoodUserDialogFragment {
+            val dialog = FoodUserDialogFragment()
+
+            val args = Bundle()
+            args.putSerializable("foodUser", f)
+            dialog.arguments = args
+            return dialog
+        }
+
+        fun newInstance(): FoodUserDialogFragment {
+            return FoodUserDialogFragment()
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if(arguments?.containsKey("foodUser") == true){
+            foodUser = arguments?.getSerializable("foodUser") as FoodUserModel
+        }
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        _binding = FragmentFoodDialogBinding.inflate(inflater, container, false)
+        _binding = FragmentFoodUserDialogBinding.inflate(inflater, container, false)
 
         return binding.root
     }
@@ -42,6 +64,12 @@ class FoodDialogFragment : DialogFragment(), View.OnClickListener {
 
         binding.createButtonFoodDialog.setOnClickListener(this)
         binding.createButtonFoodDialog.setOnClickListener(this)
+
+        if(::foodUser.isInitialized){
+            binding.nameEditTextFoodDialog.setText(foodUser.title)
+            binding.gramsEditTextFoodDialog.setText(foodUser.grams.toString())
+            binding.descriptionEditTextFoodDialog.setText(foodUser.description)
+        }
     }
 
     override fun onClick(v: View) {
@@ -53,9 +81,15 @@ class FoodDialogFragment : DialogFragment(), View.OnClickListener {
                 Toast.makeText(context, R.string.toast_fill_action, Toast.LENGTH_SHORT).show()
                 return
             }
-            val m = MealModel(title)
-            Toast.makeText(context, "Food created", Toast.LENGTH_SHORT).show()
-//            mealVM.createMeals(m)
+            val fu = FoodUserModel(title=title, grams=grams, description=desc)
+            if(::foodUser.isInitialized){
+                fu.dietId = foodUser.dietId
+                fu.mealId = foodUser.mealId
+                fu.id = foodUser.id
+                foodUserVM.updateFoodUser(fu)
+            } else {
+                foodUserVM.createFoodUser(foodUser)
+            }
             dismiss()
         } else if (v.id == R.id.cancel_button_food_dialog) {
             dismiss()
