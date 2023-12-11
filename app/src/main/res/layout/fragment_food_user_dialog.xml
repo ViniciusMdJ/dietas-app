@@ -15,31 +15,49 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
-    <EditText
-        android:id="@+id/name_edit_text_food_dialog"
+
+<!--    <EditText-->
+<!--        android:id="@+id/name_edit_text_food_dialog"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:inputType="text"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_marginLeft="20dp"-->
+<!--        android:layout_marginRight="20dp"-->
+<!--        android:layout_marginBottom="10dp"-->
+<!--        android:hint="@string/new_aliment_name"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/title_text_food_dialog"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"/>-->
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/name_search_view_food_dialog"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:inputType="text"
+        app:queryHint="@string/search_hint_food_dialog"
+        app:iconifiedByDefault="false"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="10dp"
         android:hint="@string/new_aliment_name"
         app:layout_constraintTop_toBottomOf="@+id/title_text_food_dialog"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
 
     <EditText
         android:id="@+id/grams_edit_text_food_dialog"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:inputType="number"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="10dp"
         android:hint="@string/new_aliment_weight"
-        app:layout_constraintTop_toBottomOf="@+id/name_edit_text_food_dialog"
+        app:layout_constraintTop_toBottomOf="@+id/name_search_view_food_dialog"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -77,4 +95,16 @@
         app:layout_constraintStart_toEndOf="@+id/cancel_button_food_dialog"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="20dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_food_dialog"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/name_search_view_food_dialog"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/background_circle"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

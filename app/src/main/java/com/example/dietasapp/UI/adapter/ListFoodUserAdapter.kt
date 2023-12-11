@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dietasapp.UI.viewHolder.ListFoodUserViewHolder
-import com.example.dietasapp.data.intefaces.FoodsInterface
+import com.example.dietasapp.data.intefaces.FoodsUserInterface
 import com.example.dietasapp.data.model.FoodUserModel
 import com.example.dietasapp.databinding.FoodLineBinding
 
-class ListFoodUserAdapter(private val clickFood: FoodsInterface): RecyclerView.Adapter<ListFoodUserViewHolder>() {
+class ListFoodUserAdapter(private val clickFood: FoodsUserInterface): RecyclerView.Adapter<ListFoodUserViewHolder>() {
     private var foodList: List<FoodUserModel> = listOf()
     private lateinit var binding: FoodLineBinding
 
@@ -21,7 +21,7 @@ class ListFoodUserAdapter(private val clickFood: FoodsInterface): RecyclerView.A
 
     override fun onBindViewHolder(holder: ListFoodUserViewHolder, position: Int) {
         holder.bindVH(foodList[position])
-        clickFood.setFoodsClickListener(foodList[position], binding)
+        clickFood.setFoodsUserClickListener(foodList[position], binding)
     }
 
     override fun getItemCount(): Int {

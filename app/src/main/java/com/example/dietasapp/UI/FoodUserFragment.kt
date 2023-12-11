@@ -7,26 +7,31 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dietasapp.R
 import com.example.dietasapp.UI.adapter.ListFoodUserAdapter
-import com.example.dietasapp.data.intefaces.FoodsInterface
+import com.example.dietasapp.data.intefaces.FoodsUserInterface
+import com.example.dietasapp.data.model.FoodModel
 import com.example.dietasapp.data.model.FoodUserModel
-import com.example.dietasapp.data.model.MealModel
 import com.example.dietasapp.databinding.FoodLineBinding
 import com.example.dietasapp.databinding.FragmentFoodsBinding
+import com.example.dietasapp.viewModel.DietsViewModel
 import com.example.dietasapp.viewModel.FoodUserViewModel
+import com.example.dietasapp.viewModel.MealsViewModel
+import kotlinx.coroutines.flow.callbackFlow
 
-class FoodUserFragment : Fragment(), View.OnClickListener, FoodsInterface {
+class FoodUserFragment : Fragment(), View.OnClickListener, FoodsUserInterface {
     private var _binding: FragmentFoodsBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter: ListFoodUserAdapter
     private val args: FoodUserFragmentArgs by navArgs()
     private val foodUserVM: FoodUserViewModel by activityViewModels()
+
+    private val mealVM: MealsViewModel by activityViewModels()
+    private val dietVM: DietsViewModel by activityViewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,6 +67,7 @@ class FoodUserFragment : Fragment(), View.OnClickListener, FoodsInterface {
 
     private fun setObserver(){
         foodUserVM.getListFoodUser().observe(viewLifecycleOwner) {
+            Log.i("FoodUserFragment", "Lista de alimentos: $it")
             adapter.updateFoodList(it)
         }
     }
@@ -72,15 +78,23 @@ class FoodUserFragment : Fragment(), View.OnClickListener, FoodsInterface {
         }
     }
 
-    override fun setFoodsClickListener(f: FoodUserModel, binding: FoodLineBinding) {
+    override fun setFoodsUserClickListener(f: FoodUserModel, binding: FoodLineBinding) {
         binding.editIconFood.setOnClickListener {
             FoodUserDialogFragment.newInstance(f).show(parentFragmentManager, "dialog")
         }
         binding.deleteIconFood.setOnClickListener {
             AlertDialog.Builder(context)
                 .setTitle("Deletar o Alimento")
-                .setMessage("Deseja deletar o alimento ${f.title}?")
+                .setMessage("Deseja deletar o alimento ${f.food.title}?")
                 .setPositiveButton("Sim") { _, _ ->
+                    val foodNegative = FoodModel(
+                        calorie=-f.food.calorie,
+                        fat=-f.food.fat,
+                        protein=-f.food.protein,
+                        carbohydrate=-f.food.carbohydrate
+                    )
+                    mealVM.updatemacronutrients(args.meal.id, foodNegative)
+                    dietVM.updatemacronutrients(args.meal.dietId, foodNegative)
                     foodUserVM.deleteFoodUser(f)
                 }
                 .setNegativeButton("Não") { _, _ -> }

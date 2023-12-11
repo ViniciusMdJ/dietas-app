@@ -8,12 +8,12 @@ class ListFoodUserViewHolder(private val binding: FoodLineBinding) : RecyclerVie
 
 
     fun bindVH(food: FoodUserModel){
-        binding.foodTitleText.text = food.title
+        binding.foodTitleText.text = food.food.title
         binding.foodDescriptionText.text = food.description
-        binding.calText.text = food.calorie.toString()
-        binding.carbText.text = food.carbohydrate.toString()
-        binding.proteinText.text = food.protein.toString()
-        binding.fatText.text = food.fat.toString()
+        binding.calText.text = food.food.calorie.toString()
+        binding.carbText.text = food.food.carbohydrate.toString()
+        binding.proteinText.text = food.food.protein.toString()
+        binding.fatText.text = food.food.fat.toString()
     }
 
 }
