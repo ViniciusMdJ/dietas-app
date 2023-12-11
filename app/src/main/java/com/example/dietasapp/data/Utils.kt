@@ -18,8 +18,13 @@ class Utils {
         const val CollectionsDiet = "dietas"
         const val CollectionsMeal = "refeicoes"
         const val CollectionsFoodUser = "alimentosUsuario"
+        const val CollectionsFood = "alimentos"
         const val FieldUserPhoneNumber = "numeroTelefone"
         const val FieldUserName = "nome"
+
+        fun getDocRef(path: String): DocumentReference {
+            return db.document(path)
+        }
 
         fun getUserDocRef(): DocumentReference {
             return db.collection(CollectionUser).document(auth.currentUser!!.uid)
@@ -48,6 +53,10 @@ class Utils {
         fun getUserFoodUserDocRef(dietId: String, mealId: String, foodUserId: String): DocumentReference {
             return getUserFoodUsersColRef(dietId, mealId).document(foodUserId)
 
+        }
+
+        fun getFoodColRef(): CollectionReference {
+            return db.collection(CollectionsFood)
         }
 
         fun getUserLiveData(): LiveData<UserModel?> {
