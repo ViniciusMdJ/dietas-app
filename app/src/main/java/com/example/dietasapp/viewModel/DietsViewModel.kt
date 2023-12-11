@@ -155,23 +155,44 @@ class DietsViewModel: ViewModel() {
             }
     }
 
-    fun updatemacronutrients(dietId: String, food: FoodModel){
+    /**
+     * Updates the macronutrient values in a specific diet document in Firestore.
+     *
+     * This function increments the carbohydrate, protein, fat, and calorie values of a diet
+     * identified by [dietId] based on the macronutrient values of the provided [food] model.
+     *
+     * @param dietId The ID of the diet document to be updated.
+     * @param food The [FoodModel] containing macronutrient values to be added to the diet.
+     */
+    fun updatemacronutrients(dietId: String, food: FoodModel) {
         val colDietRef = Utils.Firestore.getUserDietsColRef()
         colDietRef.document(dietId)
-            .update("carbohydrate", FieldValue.increment(food.carbohydrate.toLong()),
+            .update(
+                "carbohydrate", FieldValue.increment(food.carbohydrate.toLong()),
                 "protein", FieldValue.increment(food.protein.toLong()),
                 "fat", FieldValue.increment(food.fat.toLong()),
                 "calorie", FieldValue.increment(food.calorie.toLong())
             )
             .addOnSuccessListener {
-                Log.i("DietsViewModel", "Macronutrientes atualizados com sucesso")
+                Log.i("DietsViewModel", "Macronutrients successfully updated")
                 updateAllDietsDB()
             }
             .addOnFailureListener {
-                Log.e("DietsViewModel", "Erro ao atualizar macronutrientes")
+                Log.e("DietsViewModel", "Failed to update macronutrients")
             }
     }
 
+    /**
+     * Updates the macronutrient values in a specific diet document in Firestore based on the changes
+     * between an old [FoodModel] and a new [FoodModel].
+     *
+     * This function calculates the difference in macronutrient values between the old and new foods
+     * and then calls the [updatemacronutrients] function to update the corresponding diet document.
+     *
+     * @param dietId The ID of the diet document to be updated.
+     * @param oldFood The original [FoodModel] with the old macronutrient values.
+     * @param newFood The updated [FoodModel] with the new macronutrient values.
+     */
     fun updatemacronutrients(dietId: String, oldFood: FoodModel, newFood: FoodModel) {
         val food = FoodModel(
             calorie = newFood.calorie - oldFood.calorie,

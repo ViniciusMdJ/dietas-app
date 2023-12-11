@@ -44,7 +44,14 @@ class FoodUserViewModel: ViewModel() {
         mealId = id
     }
 
-    fun setFood(f: FoodModel){
+    /**
+     * Sets the value of the LiveData representing a selected food item.
+     *
+     * This function updates the value of the LiveData with the provided [FoodModel].
+     *
+     * @param f The [FoodModel] to be set as the selected food item.
+     */
+    fun setFood(f: FoodModel) {
         food.value = f
     }
 
@@ -140,10 +147,20 @@ class FoodUserViewModel: ViewModel() {
             }
     }
 
+    /**
+     * Gets the current meal ID.
+     *
+     * @return A [String] representing the current meal ID.
+     */
     fun getMealId(): String {
         return mealId
     }
 
+    /**
+     * Gets the current diet ID.
+     *
+     * @return A [String] representing the current diet ID.
+     */
     fun getDietId(): String {
         return dietId
     }

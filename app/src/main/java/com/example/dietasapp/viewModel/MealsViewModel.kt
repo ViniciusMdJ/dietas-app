@@ -104,6 +104,15 @@ class MealsViewModel : ViewModel() {
             }
     }
 
+    /**
+     * Updates the macronutrient values in a specific meal document in Firestore.
+     *
+     * This function increments the calorie, fat, protein, and carbohydrate values of a meal
+     * identified by [mealId] based on the macronutrient values of the provided [food] model.
+     *
+     * @param mealId The ID of the meal document to be updated.
+     * @param food The [FoodModel] containing macronutrient values to be added to the meal.
+     */
     fun updatemacronutrients(mealId: String, food: FoodModel) {
         val docMealRef = Utils.Firestore.getUserMealsDocRef(dietId, mealId)
         docMealRef
@@ -114,13 +123,24 @@ class MealsViewModel : ViewModel() {
                 "carbohydrate", FieldValue.increment(food.carbohydrate.toLong())
             )
             .addOnSuccessListener {
-                Log.i("MealsViewModel", "Macronutrientes atualizados com sucesso")
+                Log.i("MealsViewModel", "Macronutrients successfully updated")
             }
             .addOnFailureListener {
-                Log.e("MealsViewModel", "Erro ao atualizar macronutrientes")
+                Log.e("MealsViewModel", "Failed to update macronutrients")
             }
     }
 
+    /**
+     * Updates the macronutrient values in a specific meal document in Firestore based on the changes
+     * between an old [FoodModel] and a new [FoodModel].
+     *
+     * This function calculates the difference in macronutrient values between the old and new foods
+     * and then calls the [updatemacronutrients] function to update the corresponding meal document.
+     *
+     * @param mealId The ID of the meal document to be updated.
+     * @param oldFood The original [FoodModel] with the old macronutrient values.
+     * @param newFood The updated [FoodModel] with the new macronutrient values.
+     */
     fun updatemacronutrients(mealId: String, oldFood: FoodModel, newFood: FoodModel) {
         val food = FoodModel(
             calorie = newFood.calorie - oldFood.calorie,
