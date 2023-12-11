@@ -1,5 +1,6 @@
 package com.example.dietasapp.UI
 
+import android.annotation.SuppressLint
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,8 +13,10 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.example.dietasapp.R
+import com.example.dietasapp.data.model.FoodModel
 import com.example.dietasapp.data.model.MealModel
 import com.example.dietasapp.databinding.FragmentMealDialogBinding
+import com.example.dietasapp.viewModel.DietsViewModel
 import com.example.dietasapp.viewModel.MealsViewModel
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -22,9 +25,12 @@ class MealDialogFragment : DialogFragment(), View.OnClickListener, TimePickerDia
     private var _binding: FragmentMealDialogBinding? = null
     private val binding get() = _binding!!
     private val mealVM: MealsViewModel by activityViewModels()
+    private val dietVM: DietsViewModel by activityViewModels()
+
 
     private lateinit var time: Calendar
     private lateinit var meal: MealModel
+    @SuppressLint("SimpleDateFormat")
     private val sdf = SimpleDateFormat("HH:mm")
 
     companion object {

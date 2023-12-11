@@ -15,9 +15,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dietasapp.R
 import com.example.dietasapp.UI.adapter.ListMealAdapter
 import com.example.dietasapp.data.intefaces.MealsInterface
+import com.example.dietasapp.data.model.FoodModel
 import com.example.dietasapp.data.model.MealModel
 import com.example.dietasapp.databinding.FragmentMealBinding
 import com.example.dietasapp.databinding.MealLineBinding
+import com.example.dietasapp.viewModel.DietsViewModel
 import com.example.dietasapp.viewModel.MealsViewModel
 
 class MealFragment : Fragment(), View.OnClickListener, MealsInterface {
@@ -26,6 +28,8 @@ class MealFragment : Fragment(), View.OnClickListener, MealsInterface {
     private lateinit var adapter: ListMealAdapter
     private val args: MealFragmentArgs by navArgs()
     private val mealVM: MealsViewModel by activityViewModels()
+
+    private val dietVM: DietsViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -86,6 +90,13 @@ class MealFragment : Fragment(), View.OnClickListener, MealsInterface {
                 .setTitle("Deletar Refeição")
                 .setMessage("Deseja deletar a refeição ${m.title}?")
                 .setPositiveButton("Sim") { _, _ ->
+                    val foodNegative = FoodModel(
+                        calorie = -m.calorie,
+                        fat = -m.fat,
+                        protein = -m.protein,
+                        carbohydrate = -m.carbohydrate
+                    )
+                    dietVM.updatemacronutrients(m.dietId, foodNegative)
                     mealVM.deleteMeal(m)
                 }
                 .setNegativeButton("Não") { _, _ -> }
