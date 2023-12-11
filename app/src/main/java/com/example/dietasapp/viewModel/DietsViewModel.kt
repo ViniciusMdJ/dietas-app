@@ -6,7 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.dietasapp.data.Utils
 import com.example.dietasapp.data.model.DietModel
+import com.example.dietasapp.data.model.FoodModel
 import com.example.dietasapp.data.model.UserModel
+import com.google.firebase.firestore.FieldValue
 
 class DietsViewModel: ViewModel() {
 
@@ -110,5 +112,32 @@ class DietsViewModel: ViewModel() {
             .addOnFailureListener {
                 Log.e("DietsViewModel", "Erro ao atualizar dieta")
             }
+    }
+
+    fun updatemacronutrients(dietId: String, food: FoodModel){
+        val colDietRef = Utils.Firestore.getUserDietsColRef()
+        colDietRef.document(dietId)
+            .update("carbohydrate", FieldValue.increment(food.carbohydrate.toLong()),
+                "protein", FieldValue.increment(food.protein.toLong()),
+                "fat", FieldValue.increment(food.fat.toLong()),
+                "calorie", FieldValue.increment(food.calorie.toLong())
+            )
+            .addOnSuccessListener {
+                Log.i("DietsViewModel", "Macronutrientes atualizados com sucesso")
+                updateAllDietsDB()
+            }
+            .addOnFailureListener {
+                Log.e("DietsViewModel", "Erro ao atualizar macronutrientes")
+            }
+    }
+
+    fun updatemacronutrients(dietId: String, oldFood: FoodModel, newFood: FoodModel) {
+        val food = FoodModel(
+            calorie = newFood.calorie - oldFood.calorie,
+            fat = newFood.fat - oldFood.fat,
+            protein = newFood.protein - oldFood.protein,
+            carbohydrate = newFood.carbohydrate - oldFood.carbohydrate
+        )
+        updatemacronutrients(dietId, food)
     }
 }
