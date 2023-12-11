@@ -49,4 +49,6 @@
     <string name="new_aliment_name">Nome do Alimento</string>
     <string name="new_aliment_weight">Peso do Alimento (gramas)</string>
     <string name="new_aliment_description">Descrição para o Alimento</string>
+    <string name="search_hint_food_dialog">Insira o nome do alimento</string>
+    <string name="toast_select_food">Selecione um alimento</string>
 </resources>
