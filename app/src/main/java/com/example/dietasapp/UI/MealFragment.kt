@@ -1,6 +1,8 @@
 package com.example.dietasapp.UI
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -72,8 +74,22 @@ class MealFragment : Fragment(), View.OnClickListener, MealsInterface {
 
     override fun setMealsClickListener(m: MealModel, binding: MealLineBinding) {
         binding.root.setOnClickListener {
-            val action = MealFragmentDirections.actionMealFragmentToFoodsFragment(args.diet.id, m)
+            val action = MealFragmentDirections.actionMealFragmentToFoodsFragment(m)
+            Log.d("TAG", "setMealsClickListener: $m")
             findNavController().navigate(action)
+        }
+        binding.editIconMeal.setOnClickListener {
+            MealDialogFragment.newInstance(m).show(parentFragmentManager, "dialog")
+        }
+        binding.deleteIconMeal.setOnClickListener {
+            AlertDialog.Builder(context)
+                .setTitle("Deletar Refeição")
+                .setMessage("Deseja deletar a refeição ${m.title}?")
+                .setPositiveButton("Sim") { _, _ ->
+                    mealVM.deleteMeal(m)
+                }
+                .setNegativeButton("Não") { _, _ -> }
+                .show()
         }
     }
 }

@@ -15,8 +15,8 @@ import com.example.dietasapp.R
 import com.example.dietasapp.data.model.MealModel
 import com.example.dietasapp.databinding.FragmentMealDialogBinding
 import com.example.dietasapp.viewModel.MealsViewModel
+import java.text.SimpleDateFormat
 import java.util.Calendar
-import java.util.Date
 
 class MealDialogFragment : DialogFragment(), View.OnClickListener, TimePickerDialog.OnTimeSetListener {
     private var _binding: FragmentMealDialogBinding? = null
@@ -24,6 +24,31 @@ class MealDialogFragment : DialogFragment(), View.OnClickListener, TimePickerDia
     private val mealVM: MealsViewModel by activityViewModels()
 
     private lateinit var time: Calendar
+    private lateinit var meal: MealModel
+    private val sdf = SimpleDateFormat("HH:mm")
+
+    companion object {
+        fun newInstance(m: MealModel): MealDialogFragment {
+            val f = MealDialogFragment()
+
+            val args = Bundle()
+            args.putSerializable("meal", m)
+            f.arguments = args
+            return f
+        }
+
+        fun newInstance(): MealDialogFragment {
+            return MealDialogFragment()
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if(arguments?.containsKey("meal") == true){
+            meal = arguments?.getSerializable("meal") as MealModel
+        }
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,6 +68,13 @@ class MealDialogFragment : DialogFragment(), View.OnClickListener, TimePickerDia
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if(::meal.isInitialized){
+            binding.nameEditTextMealDialog.setText(meal.title)
+            binding.timeTextMealDialog.text = sdf.format(meal.date)
+            time = Calendar.getInstance()
+            time.time = meal.date
+        }
+
         binding.createButtonMealDialog.setOnClickListener(this)
         binding.cancelButtonMealDialog.setOnClickListener(this)
         binding.timeButtonMealDialog.setOnClickListener(this)
@@ -60,14 +92,28 @@ class MealDialogFragment : DialogFragment(), View.OnClickListener, TimePickerDia
                 return
             }
             val m = MealModel(title, date=time.time)
-            mealVM.createMeals(m)
+            if(::meal.isInitialized){
+                m.id = meal.id
+                m.dietId = meal.dietId
+                mealVM.updateMeals(m)
+            }
+            else{
+                mealVM.createMeals(m)
+            }
             dismiss()
         }
         else if(v.id == R.id.cancel_button_meal_dialog){
             dismiss()
         }
         else if(v.id == R.id.time_button_meal_dialog){
-            TimePickerDialog(context, this, 0, 0, true).show()
+            var hour = 0
+            var sec = 0
+            if(::time.isInitialized){
+                hour = time.get(Calendar.HOUR_OF_DAY)
+                sec = time.get(Calendar.MINUTE)
+            }
+
+            TimePickerDialog(context, this, hour, sec, true).show()
         }
     }
 
@@ -83,7 +129,7 @@ class MealDialogFragment : DialogFragment(), View.OnClickListener, TimePickerDia
         time = Calendar.getInstance()
         time.set(2000, 0, 1, hour, sec, 0)
 
-        Toast.makeText(context, "${time.get(Calendar.HOUR_OF_DAY)}:${time.get(Calendar.MINUTE)}", Toast.LENGTH_SHORT).show()
+        binding.timeTextMealDialog.text = sdf.format(time.time)
     }
 
 
