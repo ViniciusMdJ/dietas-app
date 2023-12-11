@@ -28,12 +28,9 @@
     </fragment>
     <fragment
         android:id="@+id/foodsFragment"
-        android:name="com.example.dietasapp.UI.FoodsFragment"
+        android:name="com.example.dietasapp.UI.FoodUserFragment"
         android:label="Alimentos"
         tools:layout="@layout/fragment_foods" >
-        <argument
-            android:name="dietId"
-            app:argType="string" />
         <argument
             android:name="meal"
             app:argType="com.example.dietasapp.data.model.MealModel" />
