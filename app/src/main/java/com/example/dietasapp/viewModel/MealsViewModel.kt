@@ -28,6 +28,8 @@ class MealsViewModel: ViewModel() {
             for (doc in it){
                 val meal = doc.toObject(MealModel::class.java)
                 meal.id = doc.id
+                meal.dietId = dietId
+                Log.i("MealsViewModelUpdate", "Refeição: $meal")
                 list.add(meal)
             }
             listMeals.value = list
@@ -46,6 +48,31 @@ class MealsViewModel: ViewModel() {
             }
             .addOnFailureListener {
                 Log.e("MealsViewModel", "Erro ao criar refeição")
+            }
+    }
+
+    fun updateMeals(meal: MealModel){
+        Log.i("MealsViewModel", "Refeição: $meal")
+        val docMealRef = Utils.Firestore.getUserMealsDocRef(meal.dietId, meal.id)
+        docMealRef.update("title", meal.title, "date", meal.date)
+            .addOnSuccessListener {
+                Log.i("MealsViewModel", "Refeição atualizada com sucesso")
+                updateAllMealsDB()
+            }
+            .addOnFailureListener {
+                Log.e("MealsViewModel", "Erro ao atualizar refeição")
+            }
+    }
+
+    fun deleteMeal(m: MealModel) {
+        val docMealRef = Utils.Firestore.getUserMealsDocRef(m.dietId, m.id)
+        docMealRef.delete()
+            .addOnSuccessListener {
+                Log.i("MealsViewModel", "Refeição deletada com sucesso")
+                updateAllMealsDB()
+            }
+            .addOnFailureListener {
+                Log.e("MealsViewModel", "Erro ao deletar refeição")
             }
     }
 }

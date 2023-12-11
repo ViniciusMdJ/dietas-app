@@ -20,7 +20,7 @@
         android:id="@+id/star_icon"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:src="@drawable/baseline_star_24"
+        android:src="@drawable/baseline_star_unselected_24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginStart="20dp"
@@ -43,9 +43,17 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:src="@drawable/baseline_edit_note_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/delete_icon_diet"
         app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="20dp"/>
+    <ImageView
+        android:id="@+id/delete_icon_diet"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/baseline_delete_24"
+        app:layout_constraintTop_toTopOf="@id/edit_icon_diet"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="20dp"/>
 
     <LinearLayout

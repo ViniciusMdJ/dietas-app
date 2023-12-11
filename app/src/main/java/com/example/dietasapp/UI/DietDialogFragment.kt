@@ -19,6 +19,31 @@ class DietDialogFragment : DialogFragment(), View.OnClickListener {
     private val binding get() = _binding!!
     private val dietVM: DietsViewModel by activityViewModels()
 
+    private lateinit var diet: DietModel
+
+    companion object {
+        fun newInstance(d: DietModel): DietDialogFragment {
+            val f = DietDialogFragment()
+
+            val args = Bundle()
+            args.putSerializable("diet", d)
+            f.arguments = args
+            return f
+        }
+
+        fun newInstance(): DietDialogFragment {
+            return DietDialogFragment()
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if(arguments?.containsKey("diet") == true){
+            diet = arguments?.getSerializable("diet") as DietModel
+        }
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,6 +62,11 @@ class DietDialogFragment : DialogFragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if(::diet.isInitialized){
+            binding.nameEditTextDietDialog.setText(diet.title)
+            binding.descriptionEditTextDietDialog.setText(diet.description)
+        }
+
         binding.createButtonDietDialog.setOnClickListener(this)
         binding.cancelButtonDietDialog.setOnClickListener(this)
     }
@@ -50,7 +80,12 @@ class DietDialogFragment : DialogFragment(), View.OnClickListener {
                 return
             }
             val d = DietModel(title, description)
-            dietVM.createDiet(d)
+            if(::diet.isInitialized){
+                d.id = diet.id
+                dietVM.updateDiet(d)
+            }else{
+                dietVM.createDiet(d)
+            }
             dismiss()
         }
         else if(v.id == R.id.cancel_button_diet_dialog){
