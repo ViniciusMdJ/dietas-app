@@ -2,7 +2,6 @@ package com.example.dietasapp.UI
 
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import com.example.dietasapp.R
-import com.example.dietasapp.databinding.FragmentLoginBinding
 import com.example.dietasapp.databinding.FragmentSignUpBinding
 import com.example.dietasapp.viewModel.MainViewModel
 
