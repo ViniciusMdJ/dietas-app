@@ -8,10 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.dietasapp.data.Utils
 import com.example.dietasapp.data.model.FoodModel
 import com.example.dietasapp.data.model.FoodUserModel
-import com.example.dietasapp.data.model.MealModel
-import com.google.android.gms.tasks.OnSuccessListener
-import com.google.android.gms.tasks.Tasks
-import com.google.firebase.firestore.DocumentSnapshot
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
@@ -32,11 +28,19 @@ class FoodUserViewModel: ViewModel() {
         return food
     }
 
-    fun setDietId(id: String){
+    /**
+     * Set the current diet ID.
+     * @param id The ID of the current diet.
+     */
+    fun setDietId(id: String) {
         dietId = id
     }
 
-    fun setMealId(id: String){
+    /**
+     * Set the current meal ID.
+     * @param id The ID of the current meal.
+     */
+    fun setMealId(id: String) {
         mealId = id
     }
 
@@ -44,11 +48,15 @@ class FoodUserViewModel: ViewModel() {
         food.value = f
     }
 
+    /**
+     * Update the list of food users from Firestore.
+     */
     fun updateAllFoodUserDB() {
         viewModelScope.launch {
             try {
                 val colFoodUserRef = Utils.Firestore.getUserFoodUsersColRef(dietId, mealId)
 
+                // Use withContext para mudar para o contexto Dispatchers.IO para operações de rede
                 val querySnapshot = withContext(Dispatchers.IO) {
                     colFoodUserRef.get().await()
                 }
@@ -64,16 +72,10 @@ class FoodUserViewModel: ViewModel() {
                         Utils.Firestore.getDocRef(foodUser.foodReference).get().await()
                     }
 
-                    val multipler = foodUser.grams / 100
                     val food = docFood.toObject(FoodModel::class.java)
                     if (food != null) {
                         Log.i("FoodUserViewModelUpdate", "Alimento: $food")
-                        food.calorie *= multipler
-                        food.fat *= multipler
-                        food.protein *= multipler
-                        food.carbohydrate *= multipler
                         food.id = docFood.id
-
                         foodUser.food = food
                     }
 
@@ -83,45 +85,58 @@ class FoodUserViewModel: ViewModel() {
 
                 listFoodUser.value = list
             } catch (e: Exception) {
+                // Lide com exceções, por exemplo, imprima o erro
                 e.printStackTrace()
                 Log.e("FoodUserViewModel", "Erro ao buscar refeições")
             }
         }
     }
 
-    fun createFoodUser(foodUser: FoodUserModel){
+    /**
+     * Create a new food user in Firestore.
+     * @param foodUser The food user to be created.
+     */
+    fun createFoodUser(foodUser: FoodUserModel) {
         val colMFoodUserRef = Utils.Firestore.getUserFoodUsersColRef(dietId, mealId)
         colMFoodUserRef.add(foodUser)
             .addOnSuccessListener {
-                Log.i("FoodUserViewModel", "Refeição criada com sucesso")
+                Log.i("FoodUserViewModel", "Food user created successfully")
                 updateAllFoodUserDB()
             }
             .addOnFailureListener {
-                Log.e("FoodUserViewModel", "Erro ao criar refeição")
+                Log.e("FoodUserViewModel", "Failed to create food user")
             }
     }
 
-    fun updateFoodUser(foodUser: FoodUserModel){
+    /**
+     * Update an existing food user in Firestore.
+     * @param foodUser The updated food user information.
+     */
+    fun updateFoodUser(foodUser: FoodUserModel) {
         val docFoodUserRef = Utils.Firestore.getUserFoodUserDocRef(dietId, mealId, foodUser.id)
         docFoodUserRef.update("title", foodUser.food.title, "description", foodUser.description, "grams", foodUser.grams)
             .addOnSuccessListener {
-                Log.i("FoodUserViewModel", "Refeição atualizada com sucesso")
+                Log.i("FoodUserViewModel", "Food user updated successfully")
                 updateAllFoodUserDB()
             }
             .addOnFailureListener {
-                Log.e("FoodUserViewModel", "Erro ao atualizar refeição")
+                Log.e("FoodUserViewModel", "Failed to update food user")
             }
     }
 
+    /**
+     * Delete a food user from Firestore.
+     * @param fu The food user to be deleted.
+     */
     fun deleteFoodUser(fu: FoodUserModel) {
         val docFoodUserRef = Utils.Firestore.getUserFoodUserDocRef(dietId, mealId, fu.id)
         docFoodUserRef.delete()
             .addOnSuccessListener {
-                Log.i("FoodUserViewModel", "Refeição deletada com sucesso")
+                Log.i("FoodUserViewModel", "Food user deleted successfully")
                 updateAllFoodUserDB()
             }
             .addOnFailureListener {
-                Log.e("FoodUserViewModel", "Erro ao deletar refeição")
+                Log.e("FoodUserViewModel", "Failed to delete food user")
             }
     }
 

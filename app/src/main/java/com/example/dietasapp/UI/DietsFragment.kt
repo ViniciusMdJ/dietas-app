@@ -21,12 +21,14 @@ import com.example.dietasapp.databinding.DietLineBinding
 import com.example.dietasapp.databinding.FragmentDietsBinding
 import com.example.dietasapp.viewModel.DietsViewModel
 
+/**
+ * Fragment for displaying a list of diets.
+ */
 class DietsFragment : Fragment(), View.OnClickListener, DietsInterface {
     private var _binding: FragmentDietsBinding? = null
     private val binding get() = _binding!!
     private val dietVM: DietsViewModel by activityViewModels()
     private lateinit var adapter: ListDietAdapter
-
     private lateinit var user: UserModel
 
     override fun onCreateView(
@@ -58,6 +60,9 @@ class DietsFragment : Fragment(), View.OnClickListener, DietsInterface {
         setObserver()
     }
 
+    /**
+     * Sets observers for LiveData objects in the ViewModel.
+     */
     private fun setObserver(){
         dietVM.getListDiets().observe(viewLifecycleOwner) {
             adapter.updateDietList(it)
@@ -73,6 +78,12 @@ class DietsFragment : Fragment(), View.OnClickListener, DietsInterface {
         }
     }
 
+    /**
+     * Implements the interface function to handle clicks on diet items.
+     *
+     * @param d The clicked DietModel.
+     * @param binding The binding object for the clicked item view.
+     */
     override fun setDietsClickListener(d: DietModel, binding: DietLineBinding) {
         binding.starIcon.setOnClickListener(){
             if(it.tag == true){
@@ -80,7 +91,6 @@ class DietsFragment : Fragment(), View.OnClickListener, DietsInterface {
             }else{
                 dietVM.setFavoriteDiet(d.id)
             }
-
         }
         dietVM.getFavoriteDiet().observe(viewLifecycleOwner) {
             if(it == d.id){

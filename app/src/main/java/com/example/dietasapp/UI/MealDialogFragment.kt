@@ -21,12 +21,14 @@ import com.example.dietasapp.viewModel.MealsViewModel
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
+/**
+ * A dialog fragment for creating or updating meal information.
+ */
 class MealDialogFragment : DialogFragment(), View.OnClickListener, TimePickerDialog.OnTimeSetListener {
     private var _binding: FragmentMealDialogBinding? = null
     private val binding get() = _binding!!
     private val mealVM: MealsViewModel by activityViewModels()
     private val dietVM: DietsViewModel by activityViewModels()
-
 
     private lateinit var time: Calendar
     private lateinit var meal: MealModel
@@ -34,6 +36,9 @@ class MealDialogFragment : DialogFragment(), View.OnClickListener, TimePickerDia
     private val sdf = SimpleDateFormat("HH:mm")
 
     companion object {
+        /**
+         * Creates a new instance of MealDialogFragment with a provided MealModel.
+         */
         fun newInstance(m: MealModel): MealDialogFragment {
             val f = MealDialogFragment()
 
@@ -43,6 +48,9 @@ class MealDialogFragment : DialogFragment(), View.OnClickListener, TimePickerDia
             return f
         }
 
+        /**
+         * Creates a new instance of MealDialogFragment without a MealModel.
+         */
         fun newInstance(): MealDialogFragment {
             return MealDialogFragment()
         }
@@ -50,10 +58,9 @@ class MealDialogFragment : DialogFragment(), View.OnClickListener, TimePickerDia
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if(arguments?.containsKey("meal") == true){
+        if (arguments?.containsKey("meal") == true) {
             meal = arguments?.getSerializable("meal") as MealModel
         }
-
     }
 
     override fun onCreateView(
@@ -74,7 +81,7 @@ class MealDialogFragment : DialogFragment(), View.OnClickListener, TimePickerDia
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if(::meal.isInitialized){
+        if (::meal.isInitialized) {
             binding.nameEditTextMealDialog.setText(meal.title)
             binding.timeTextMealDialog.text = sdf.format(meal.date)
             time = Calendar.getInstance()
@@ -131,12 +138,13 @@ class MealDialogFragment : DialogFragment(), View.OnClickListener, TimePickerDia
         dialog!!.window!!.attributes = params as WindowManager.LayoutParams
     }
 
+    /**
+     * Called when the time is set in the TimePicker.
+     */
     override fun onTimeSet(p0: TimePicker?, hour: Int, sec: Int) {
         time = Calendar.getInstance()
         time.set(2000, 0, 1, hour, sec, 0)
 
         binding.timeTextMealDialog.text = sdf.format(time.time)
     }
-
-
 }

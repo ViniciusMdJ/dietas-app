@@ -9,8 +9,10 @@ import com.example.dietasapp.data.Utils
 import com.example.dietasapp.data.Utils.Firestore.FieldUserName
 import com.example.dietasapp.data.Utils.Firestore.FieldUserPhoneNumber
 import com.google.firebase.auth.FirebaseAuth
-
-class UserProfileViewModel: ViewModel()  {
+/**
+ * ViewModel for managing user profile data.
+ */
+class UserProfileViewModel : ViewModel() {
     private var name = MutableLiveData<String>()
     private var phone = MutableLiveData<String>()
     private var email = MutableLiveData<String>()
@@ -21,25 +23,56 @@ class UserProfileViewModel: ViewModel()  {
         isLoggedOut.value = false
     }
 
-    fun getMsg(): MutableLiveData<String> {
+    /**
+     * Get LiveData for the message.
+     * @return LiveData containing the message.
+     */
+    fun getMsg(): LiveData<String> {
         return msg
     }
-    fun resetMsg(){
+
+    /**
+     * Reset the message LiveData.
+     */
+    fun resetMsg() {
         msg = MutableLiveData<String>()
     }
+
+    /**
+     * Get LiveData for the user's name.
+     * @return LiveData containing the user's name.
+     */
     fun getName(): LiveData<String?> {
         return name
     }
+
+    /**
+     * Get LiveData for the user's phone number.
+     * @return LiveData containing the user's phone number.
+     */
     fun getPhone(): LiveData<String> {
         return phone
     }
+
+    /**
+     * Get LiveData for the user's email.
+     * @return LiveData containing the user's email.
+     */
     fun getEmail(): LiveData<String> {
         return email
     }
+
+    /**
+     * Get LiveData for the log out event.
+     * @return LiveData indicating the log out event.
+     */
     fun logOutEvent(): LiveData<Boolean> {
         return isLoggedOut
     }
 
+    /**
+     * Get user data from Firestore and update LiveData.
+     */
     fun getUserData(){
         val nameRef = Utils.Firestore.getUserData()
         email.value = Utils.Firestore.getUserEmail()
@@ -55,6 +88,12 @@ class UserProfileViewModel: ViewModel()  {
             }
         }
     }
+
+    /**
+     * Set new user data and update Firestore.
+     * @param newName The new name to be set.
+     * @param newPhone The new phone number to be set.
+     */
     fun setNewUserData(newName: String, newPhone: String){
         val userDocRef = Utils.Firestore.getUserDocRef()
 
@@ -72,6 +111,10 @@ class UserProfileViewModel: ViewModel()  {
             }
         }
     }
+
+    /**
+     * Log out the user and trigger the log out event.
+     */
     fun logOut(){
         Utils.Firestore.logOutFunction()
         isLoggedOut.value = true

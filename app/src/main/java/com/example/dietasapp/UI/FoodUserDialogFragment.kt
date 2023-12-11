@@ -28,6 +28,9 @@ import com.example.dietasapp.viewModel.FoodUserViewModel
 import com.example.dietasapp.viewModel.FoodsDialogViewModel
 import com.example.dietasapp.viewModel.MealsViewModel
 
+/**
+ * DialogFragment for creating or updating a FoodUserModel.
+ */
 class FoodUserDialogFragment : DialogFragment(), View.OnClickListener, FoodsInterface {
     private var _binding: FragmentFoodUserDialogBinding? = null
     private val binding get() = _binding!!
@@ -42,6 +45,12 @@ class FoodUserDialogFragment : DialogFragment(), View.OnClickListener, FoodsInte
     private var food: FoodModel? = null
 
     companion object {
+        /**
+         * Creates a new instance of FoodUserDialogFragment with the given FoodUserModel.
+         *
+         * @param f The FoodUserModel to be passed to the dialog.
+         * @return A new instance of FoodUserDialogFragment.
+         */
         fun newInstance(f: FoodUserModel): FoodUserDialogFragment {
             val dialog = FoodUserDialogFragment()
 
@@ -51,6 +60,11 @@ class FoodUserDialogFragment : DialogFragment(), View.OnClickListener, FoodsInte
             return dialog
         }
 
+        /**
+         * Creates a new instance of FoodUserDialogFragment without any initial data.
+         *
+         * @return A new instance of FoodUserDialogFragment.
+         */
         fun newInstance(): FoodUserDialogFragment {
             return FoodUserDialogFragment()
         }

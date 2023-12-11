@@ -12,6 +12,9 @@ import com.example.dietasapp.R
 import com.example.dietasapp.databinding.FragmentUserProfileBinding
 import com.example.dietasapp.viewModel.UserProfileViewModel
 
+/**
+ * Fragment for user profile information and settings.
+ */
 class UserProfileFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentUserProfileBinding? = null
     private val binding get() = _binding!!
@@ -71,6 +74,10 @@ class UserProfileFragment : Fragment(), View.OnClickListener {
             userProfileVM.logOut()
         }
     }
+
+    /**
+     * Navigates to the login screen after logging out.
+     */
     private fun navigateToLogin() {
         val intent = Intent(requireContext(), MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

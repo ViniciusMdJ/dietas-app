@@ -10,10 +10,10 @@ class ListDietsViewHolder(private val binding: DietLineBinding) : RecyclerView.V
     fun bindVH(diet: DietModel){
         binding.title.text = diet.title
         binding.descText.text = diet.description
-        binding.calText.text = diet.calorie.toString()
-        binding.carbText.text = diet.carbohydrate.toString()
-        binding.proteinText.text = diet.protein.toString()
-        binding.fatText.text = diet.fat.toString()
+        binding.calText.text = diet.calorie.toString() + " kcal"
+        binding.carbText.text = diet.carbohydrate.toString() + " g"
+        binding.proteinText.text = diet.protein.toString() + " g"
+        binding.fatText.text = diet.fat.toString() + " g"
     }
 
 }

@@ -18,6 +18,9 @@ import com.example.dietasapp.databinding.ActivityMainBinding
 import com.example.dietasapp.viewModel.MainViewModel
 import com.google.firebase.FirebaseApp
 
+/**
+ * The main activity responsible for initializing the app and navigating between fragments.
+ */
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val mainVM: MainViewModel by viewModels()

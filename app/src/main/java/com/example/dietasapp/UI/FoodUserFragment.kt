@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dietasapp.R
@@ -22,6 +23,9 @@ import com.example.dietasapp.viewModel.FoodUserViewModel
 import com.example.dietasapp.viewModel.MealsViewModel
 import kotlinx.coroutines.flow.callbackFlow
 
+/**
+ * Fragment for displaying a list of food items associated with a meal.
+ */
 class FoodUserFragment : Fragment(), View.OnClickListener, FoodsUserInterface {
     private var _binding: FragmentFoodsBinding? = null
     private val binding get() = _binding!!
@@ -67,7 +71,6 @@ class FoodUserFragment : Fragment(), View.OnClickListener, FoodsUserInterface {
 
     private fun setObserver(){
         foodUserVM.getListFoodUser().observe(viewLifecycleOwner) {
-            Log.i("FoodUserFragment", "Lista de alimentos: $it")
             adapter.updateFoodList(it)
         }
     }
@@ -78,6 +81,12 @@ class FoodUserFragment : Fragment(), View.OnClickListener, FoodsUserInterface {
         }
     }
 
+    /**
+     * Implements the interface function to handle clicks on food items.
+     *
+     * @param f The clicked FoodUserModel.
+     * @param binding The binding object for the clicked item view.
+     */
     override fun setFoodsUserClickListener(f: FoodUserModel, binding: FoodLineBinding) {
         binding.editIconFood.setOnClickListener {
             FoodUserDialogFragment.newInstance(f).show(parentFragmentManager, "dialog")
