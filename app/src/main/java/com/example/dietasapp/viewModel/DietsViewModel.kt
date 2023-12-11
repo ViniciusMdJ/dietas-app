@@ -6,13 +6,56 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.dietasapp.data.Utils
 import com.example.dietasapp.data.model.DietModel
+import com.example.dietasapp.data.model.UserModel
 
 class DietsViewModel: ViewModel() {
 
     private var listDiets = MutableLiveData<MutableList<DietModel>>()
+    private var user = MutableLiveData<UserModel>()
+    private var favoriteDiet = MutableLiveData<String>()
+
+    init {
+        listDiets.value = mutableListOf()
+        getUserFirestore()
+    }
 
     fun getListDiets(): LiveData<MutableList<DietModel>>{
         return listDiets
+    }
+
+    fun getUser(): LiveData<UserModel> {
+        return user
+    }
+
+    fun getFavoriteDiet(): LiveData<String> {
+        return favoriteDiet
+    }
+
+    fun setFavoriteDiet(dietId: String){
+        updateFavoriteDiet(dietId)
+        favoriteDiet.value = dietId
+    }
+
+    fun updateFavoriteDiet(dietId: String){
+        val docUserRef = Utils.Firestore.getUserDocRef()
+        docUserRef.update("dietaFavorita", dietId)
+            .addOnSuccessListener {
+                Log.i("DietsViewModel", "Dieta favorita atualizada com sucesso")
+            }
+            .addOnFailureListener {
+                Log.e("DietsViewModel", "Erro ao atualizar dieta favorita")
+            }
+    }
+
+    private fun getUserFirestore(){
+        Utils.Firestore.getUserData().addOnSuccessListener {
+            val user = it.toObject(UserModel::class.java)
+            if (user != null) {
+                user.email = Utils.Firestore.getUserEmail()!!
+                this.user.value = user
+                favoriteDiet.value = user.dietaFavorita
+            }
+        }
     }
 
     fun updateAllDietsDB(){
@@ -41,6 +84,31 @@ class DietsViewModel: ViewModel() {
             }
             .addOnFailureListener {
                 Log.e("DietsViewModel", "Erro ao criar dieta")
+            }
+    }
+
+    fun deleteDiet(dietId: String){
+        val colDietRef = Utils.Firestore.getUserDietsColRef()
+        colDietRef.document(dietId).delete()
+            .addOnSuccessListener {
+                Log.i("DietsViewModel", "Dieta deletada com sucesso")
+                updateAllDietsDB()
+            }
+            .addOnFailureListener {
+                Log.e("DietsViewModel", "Erro ao deletar dieta")
+            }
+   }
+
+    fun updateDiet(diet: DietModel){
+        val colDietRef = Utils.Firestore.getUserDietsColRef()
+        colDietRef.document(diet.id)
+            .update("title", diet.title, "description", diet.description)
+            .addOnSuccessListener {
+                Log.i("DietsViewModel", "Dieta atualizada com sucesso")
+                updateAllDietsDB()
+            }
+            .addOnFailureListener {
+                Log.e("DietsViewModel", "Erro ao atualizar dieta")
             }
     }
 }
