@@ -99,9 +99,9 @@ class MealFragment : Fragment(), View.OnClickListener, MealsInterface {
                 .setPositiveButton("Sim") { _, _ ->
                     val foodNegative = FoodModel(
                         calorie = -m.calorie,
-                        fat = -m.fat,
-                        protein = -m.protein,
-                        carbohydrate = -m.carbohydrate
+                        fat = m.fat * (-1.0),
+                        protein = m.protein * (-1.0),
+                        carbohydrate = m.carbohydrate * (-1.0)
                     )
                     dietVM.updatemacronutrients(m.dietId, foodNegative)
                     mealVM.deleteMeal(m)

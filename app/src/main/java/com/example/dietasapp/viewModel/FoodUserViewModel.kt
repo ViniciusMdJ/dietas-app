@@ -79,11 +79,17 @@ class FoodUserViewModel: ViewModel() {
                         Utils.Firestore.getDocRef(foodUser.foodReference).get().await()
                     }
 
+                    val multiplier = foodUser.grams / 100.0
                     val food = docFood.toObject(FoodModel::class.java)
                     if (food != null) {
                         Log.i("FoodUserViewModelUpdate", "Alimento: $food")
                         food.id = docFood.id
+                        food.calorie = (food.calorie * multiplier).toInt()
+                        food.fat = food.fat * multiplier
+                        food.protein = food.protein * multiplier
+                        food.carbohydrate = food.carbohydrate * multiplier
                         foodUser.food = food
+
                     }
 
                     list.add(foodUser)
