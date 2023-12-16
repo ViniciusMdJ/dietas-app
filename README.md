@@ -51,7 +51,7 @@ Além de atualizar os dados, essa tela possibilida ao cliente a funcionalidade d
 
 ### Vídeo com Funcionalidades
 
-- [Youtube Video]([https://www.youtube.com/](https://youtu.be/7jYNbKLVgSg))
+- [Youtube Video]([https://youtu.be/7jYNbKLVgSg])
 
 ## Funcionalidades Futuras
 
