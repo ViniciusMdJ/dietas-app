@@ -1,6 +1,14 @@
 # 2023-2-proj-final-dietas-app
 # DietasApp
 
+## Descrição
+
+Aplicativo desenvolvido inicialmente para disciplina de 
+
+### Vídeo com Funcionalidades
+
+- [Youtube Video](https://youtu.be/7jYNbKLVgSg "Video mostrando funcionalidades")
+
 ## Proposta e Público Alvo
 
 O DietasApp é um aplicativo voltado para pessoas que desejam um lugar para organizar a sua alimentação. Nele os usuários poderão criar novas dietas e consultar os valores nutricionais contidos em cada uma delas.
@@ -48,10 +56,6 @@ Além da interação com as dietas e seus atribudos, o usuário pode acessar o s
 Caso assim o faça, o cliente será redirecionado para uma tela de perfil na qual irá visualizar seus dados registrado, podendo atualiza-los caso assim deseje.
 
 Além de atualizar os dados, essa tela possibilida ao cliente a funcionalidade de sair da sua conta, sendo redirecionado para a tela de Login novamente.
-
-### Vídeo com Funcionalidades
-
-- [Youtube Video]([https://youtu.be/7jYNbKLVgSg])
 
 ## Funcionalidades Futuras
 
