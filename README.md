@@ -1,9 +1,11 @@
 # 2023-2-proj-final-dietas-app
 # DietasApp
 
-## Descrição
+## Visão geral
 
-Aplicativo desenvolvido inicialmente para disciplina de 
+Aplicativo desenvolvido inicialmente para disciplina de PROGRAMAÇÃO PARA DISPOSITIVOS MÓVEIS, ministrada pelo professor [ANDRE PACHECO](https://github.com/paaatcha), desenvolvido em dupla por [Vinicius Moraes](https://github.com/ViniciusMdJ) e [Bruno Menegaz](https://github.com/bmacerbi).
+
+O app foi desenvolvido utilizando padrão MVVM, com Firebase Autentication para gerenciar usuários e o Firestore como banco de dados.
 
 ### Vídeo com Funcionalidades
 
